@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Dino Family Play — Portal Game Keluarga Seru & Edukatif</title>
+<meta name="description" content="Dino Family Play: portal game keluarga minimal 2 pemain. Seru, edukatif, dan bisa dimainkan di HP, tablet, laptop, dan TV.">
+<meta name="theme-color" content="#173C91">
+<meta property="og:title" content="Dino Family Play">
+<meta property="og:description" content="Bermain Bersama, Belajar Bersama, Tumbuh Bersama Keluarga.">
+<meta property="og:image" content="assets/preview.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Lewati ke konten</a>
+<header class="top">
+  <a class="brand" href="#beranda" aria-label="Dino Family Play"><img src="assets/logo.png" alt="Dino Family Play"></a>
+  <nav id="nav" aria-label="Menu utama">
+    <a href="#beranda" class="on"><img src="assets/ui/home.svg" alt="">Beranda</a>
+    <a href="#game"><img src="assets/icons/game-board.svg" alt="">Semua Game</a>
+    <a href="#misi"><img src="assets/ui/star.svg" alt="">Misi Keluarga</a>
+    <a href="#belajar"><img src="assets/icons/learning.svg" alt="">Belajar</a>
+    <a href="#belajar"><img src="assets/icons/story.svg" alt="">Cerita</a>
+    <a href="#belajar"><img src="assets/ui/trophy.svg" alt="">Pencapaian</a>
+    <a href="#" data-modal="Pengaturan"><img src="assets/ui/gear.svg" alt="">Pengaturan</a>
+  </nav>
+  <div class="tools">
+    <button class="icon-btn" data-modal="Pencarian" aria-label="Cari game"><svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="M15 15l6 6"/></svg></button>
+    <button class="icon-btn prof" data-modal="Profil Pemain" aria-label="Profil pemain"><img src="assets/characters/dino-blue.png" alt=""></button>
+    <button class="icon-btn burger" id="burger" aria-label="Buka menu" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="beranda">
+  <div class="hero-copy">
+    <h1><img class="logo" src="assets/logo.png" alt="Dino Family Play" width="900" height="300" fetchpriority="high"></h1>
+    <p class="ribbon">Bermain Bersama • Belajar Bersama • Tumbuh Bersama Keluarga</p>
+    <ul class="sign" aria-label="Keunggulan">
+      <li>Kumpulan game keluarga</li><li>Minimal 2 pemain</li><li>Seru, edukatif &amp; interaktif</li><li>Bisa di HP, tablet, laptop &amp; TV</li>
+    </ul>
+    <div class="cta">
+      <a class="btn big" href="#game"><img src="assets/ui/button-play.svg" alt="">Mulai Bermain</a>
+      <a class="btn ghost" href="#game">Semua Game</a>
+    </div>
+  </div>
+  <figure class="hero-art"><img src="assets/backgrounds/hero-family-play.webp" alt="Keluarga Dino biru, pink, merah, kuning, dan hijau bermain papan permainan di hutan" width="1672" height="941" fetchpriority="high"></figure>
+</section>
+
+<section class="sec cats-sec" id="kategori">
+  <h2 class="vh">Kategori game</h2>
+  <div class="cats">
+    <a class="cat" style="--c:#7548F5" href="#game" data-filter="papan"><img class="ic" src="assets/icons/game-board.svg" alt=""><img class="peek" src="assets/characters/dino-yellow.png" alt="" loading="lazy"><b>Game Papan</b><span>Ular Tangga, Monopoli, Ludo</span></a>
+    <a class="cat" style="--c:#E8458F" href="#game" data-filter="otak"><img class="ic" src="assets/icons/brain.svg" alt=""><img class="peek" src="assets/characters/dino-pink.png" alt="" loading="lazy"><b>Adu Otak</b><span>Memori, tebak gambar, kuis</span></a>
+    <a class="cat" style="--c:#2fa04f" href="#misi"><img class="ic" src="assets/icons/teamwork.svg" alt=""><img class="peek" src="assets/characters/dino-green.png" alt="" loading="lazy"><b>Kerja Sama</b><span>Selesaikan tantangan bersama</span></a>
+    <a class="cat" style="--c:#2D8DEB" href="#belajar"><img class="ic" src="assets/icons/learning.svg" alt=""><img class="peek" src="assets/characters/dino-blue.png" alt="" loading="lazy"><b>Belajar Seru</b><span>Hitung, baca, dan logika</span></a>
+    <a class="cat" style="--c:#C73AA3" href="#belajar"><img class="ic" src="assets/icons/story.svg" alt=""><img class="peek" src="assets/characters/dino-pterodactyl.png" alt="" loading="lazy"><b>Cerita Interaktif</b><span>Pilih jalan ceritamu</span></a>
+    <a class="cat" style="--c:#E8820C" href="#misi"><img class="ic" src="assets/icons/mission.svg" alt=""><img class="peek" src="assets/characters/dino-red.png" alt="" loading="lazy"><b>Misi Keluarga</b><span>Aktivitas harian bersama</span></a>
+    <a class="cat" style="--c:#D9A400" href="#belajar"><img class="ic" src="assets/icons/trophy.svg" alt=""><img class="peek" src="assets/characters/dino-yellow.png" alt="" loading="lazy"><b>Pencapaian</b><span>Bintang, level, dan hadiah</span></a>
+  </div>
+</section>
+
+<section class="sec" id="game">
+  <h2>Petualangan Favorit Keluarga</h2>
+  <div class="chips" role="group" aria-label="Filter game">
+    <button class="chip on" data-f="all">Semua</button><button class="chip" data-f="papan">Papan</button><button class="chip" data-f="otak">Adu Otak</button>
+  </div>
+  <div class="games" id="games"></div>
+</section>
+
+<section class="sec mission" id="misi">
+  <div class="mission-art" aria-hidden="true"><img src="assets/characters/dino-green.png" alt=""><img src="assets/characters/dino-pink.png" alt=""></div>
+  <div class="mission-body">
+    <h2>Jadilah Tim Keluarga!</h2>
+    <ul class="missions">
+      <li><img src="assets/icons/game-board.svg" alt=""><div><b>Main bersama</b><span>Satu ronde game papan malam ini</span></div><i>+1 ★</i></li>
+      <li><img src="assets/icons/learning.svg" alt=""><div><b>Belajar bersama</b><span>Jawab 5 kuis sebagai satu tim</span></div><i>+2 ★</i></li>
+      <li><img src="assets/icons/teamwork.svg" alt=""><div><b>Kerja sama</b><span>Selesaikan tantangan tanpa saling skip</span></div><i>+3 ★</i></li>
+    </ul>
+    <div class="progress"><div class="pl"><b>Contoh progres bintang mingguan</b><span>3 / 10</span></div><div class="bar"><i style="width:30%"></i></div></div>
+    <div class="reward"><img src="assets/ui/star.svg" alt=""><img src="assets/ui/star.svg" alt=""><img src="assets/ui/star.svg" alt=""><img src="assets/ui/trophy.svg" alt=""><span>Kumpulkan bintang, buka badge pencapaian.</span></div>
+  </div>
+</section>
+
+<section class="sec" id="fitur">
+  <h2>Fitur Utama</h2>
+  <ul class="fitur">
+    <li><img src="assets/icons/teamwork.svg" alt="" loading="lazy"><span>Minimal 2 Pemain</span></li>
+    <li><img src="assets/icons/game-board.svg" alt="" loading="lazy"><span>Banyak Pilihan Game</span></li>
+    <li><img src="assets/icons/learning.svg" alt="" loading="lazy"><span>Edukasi dan Belajar</span></li>
+    <li><img src="assets/icons/story.svg" alt="" loading="lazy"><span>Cerita Interaktif</span></li>
+    <li><img src="assets/icons/mission.svg" alt="" loading="lazy"><span>Misi Keluarga</span></li>
+    <li><img src="assets/icons/trophy.svg" alt="" loading="lazy"><span>Pencapaian &amp; Hadiah</span></li>
+    <li><img src="assets/icons/devices.svg" alt="" loading="lazy"><span>Multi Perangkat<small>HP, Tablet, PC, TV</small></span></li>
+    <li><img src="assets/icons/bolt.svg" alt="" loading="lazy"><span>Ringan &amp; Cepat</span></li>
+  </ul>
+</section>
+
+<section class="sec" id="belajar">
+  <h2>Bermain Sambil Belajar</h2>
+  <div class="feats">
+    <article class="feat" style="--c:#2D8DEB"><img src="assets/icons/learning.svg" alt=""><h3>Belajar Seru</h3><p>Matematika, bahasa, dan logika dalam bentuk permainan.</p><button class="btn sm" data-modal="Belajar Seru">Segera Hadir</button></article>
+    <article class="feat" style="--c:#C73AA3"><img src="assets/icons/story.svg" alt=""><h3>Cerita Interaktif</h3><p>Dongeng petualangan, keluarga memilih jalan ceritanya.</p><button class="btn sm" data-modal="Cerita Interaktif">Segera Hadir</button></article>
+    <article class="feat" style="--c:#D9A400"><img src="assets/icons/trophy.svg" alt=""><h3>Album Pencapaian</h3><p>Koleksi bintang, level, dan hadiah dari setiap permainan.</p><button class="btn sm" data-modal="Album Pencapaian">Segera Hadir</button></article>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <img src="assets/logo.png" alt="Dino Family Play" class="flogo">
+  <p>Kumpulan game keluarga yang seru dan edukatif untuk dimainkan bersama di rumah.</p>
+  <nav aria-label="Footer"><a href="#beranda">Beranda</a><a href="#game">Semua Game</a><a href="#misi">Misi Keluarga</a><a href="#belajar">Belajar</a></nav>
+  <small>BelajarBermain2.online · © 2026 Dino Family Play</small>
+</footer>
+
+<nav class="tabbar" aria-label="Menu cepat">
+  <a href="#beranda"><img src="assets/ui/home.svg" alt="">Beranda</a>
+  <a href="#game"><img src="assets/icons/game-board.svg" alt="">Game</a>
+  <a href="#misi"><img src="assets/ui/star.svg" alt="">Misi</a>
+  <a href="#belajar"><img src="assets/icons/learning.svg" alt="">Belajar</a>
+  <a href="#" data-modal="Profil Pemain"><img src="assets/characters/dino-blue.png" alt="">Profil</a>
+</nav>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mt" hidden>
+  <div class="box"><img src="assets/characters/dino-pterodactyl.png" alt=""><h3 id="mt"></h3><p id="mp">Fitur ini sedang disiapkan. Nantikan di pembaruan berikutnya!</p><button class="btn" id="mx">Oke, Mengerti</button></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
