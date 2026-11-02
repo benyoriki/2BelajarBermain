@@ -11,39 +11,90 @@ const GAMES=[
  {n:'Petualangan Dino',img:'petualangan',cat:'papan',tag:'Petualangan',pl:'2–4 pemain',d:'Jelajahi pulau Dino dan kumpulkan harta bersama.',href:''},
  {n:'Halma Dino',img:'halma',cat:'papan',tag:'Papan',pl:'2–4 pemain',d:'Lompati pion lawan dan sampai ke seberang papan.',href:''}];
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-const grid=$('#games'),COL={papan:'#39D9FF',otak:'#FF70B8'};
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* daftar game */
+const grid=$('#games');
 function render(f='all'){
- grid.innerHTML=GAMES.filter(g=>f==='all'||g.cat===f).map(g=>`<article class="game${g.href?"":" soon"}" style="--c:${COL[g.cat]||"#39D9FF"}">
- <div class="th"><img src="assets/${g.img}.webp" alt="Thumbnail ${g.n}" loading="lazy" width="720" height="480"><span class="badge">${g.tag}</span></div>
- <div class="bd"><h3>${g.n}</h3><small>${g.pl}</small><p>${g.d}</p>
- ${g.href?`<a class="btn" href="${g.href}">Mainkan</a>`:`<button class="btn" data-modal="${g.n}">Segera Hadir</button>`}</div></article>`).join('');
+ const list=GAMES.filter(g=>f==='all'||(f==='ready'?g.href:g.cat===f)).sort((a,b)=>!!b.href-!!a.href);
+ grid.innerHTML=list.map((g,i)=>`<article class="game${g.href?'':' soon'}" style="animation-delay:${i*60}ms">
+ <div class="th"><img src="assets/${g.img}.webp" alt="Thumbnail ${esc(g.n)}" loading="lazy" width="720" height="480"><span class="badge">${g.tag}</span><span class="status">${g.href?'Siap main':'Segera'}</span></div>
+ <div class="bd"><h3>${esc(g.n)}</h3><small>${g.pl}</small><p>${esc(g.d)}</p>
+ ${g.href?`<a class="btn" href="${g.href}"><img src="assets/button-play.svg" alt="" width="22" height="22">Mainkan</a>`:`<button class="btn" data-modal="${esc(g.n)}">Segera Hadir</button>`}</div></article>`).join('');
 }
+function setFilter(f){$$('.chip').forEach(x=>{const on=x.dataset.f===f;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});render(f)}
 render();
-$$('.chip').forEach(c=>c.onclick=()=>{$$('.chip').forEach(x=>x.classList.toggle('on',x===c));render(c.dataset.f)});
-$$('[data-filter]').forEach(a=>a.addEventListener('click',()=>{const f=a.dataset.filter;$$('.chip').forEach(x=>x.classList.toggle('on',x.dataset.f===f));render(f)}));
+$$('.chip').forEach(c=>c.onclick=()=>setFilter(c.dataset.f));
+$$('[data-filter]').forEach(a=>a.addEventListener('click',()=>setFilter(a.dataset.filter)));
+
 /* modal */
 const modal=$('#modal');let last;
 function open(t){last=document.activeElement;$('#mt').textContent=t;modal.hidden=false;$('#mx').focus()}
-function close(){modal.hidden=true;last&&last.focus()}
-document.addEventListener('click',e=>{const b=e.target.closest('[data-modal]');if(b)open(b.dataset.modal)});
+function close(){modal.hidden=true;last&&last.focus&&last.focus()}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-modal]');if(b){e.preventDefault();open(b.dataset.modal)}});
 $('#mx').onclick=close;modal.addEventListener('click',e=>{if(e.target===modal)close()});
-/* mobile menu */
+
+/* menu HP */
 const nav=$('#nav'),bg=$('#burger');
+const shut=()=>{nav.classList.remove('open');bg.setAttribute('aria-expanded',false)};
 bg.onclick=()=>{const o=nav.classList.toggle('open');bg.setAttribute('aria-expanded',o)};
-nav.addEventListener('click',e=>{if(e.target.closest('a')){nav.classList.remove('open');bg.setAttribute('aria-expanded',false)}});
-$$('#nav a').forEach(a=>a.addEventListener('click',()=>{$$('#nav a').forEach(x=>x.classList.toggle('on',x===a))}));
-/* Smart TV mode: otomatis (UA TV) atau paksa dengan ?tv=1 */
-const ua=navigator.userAgent;
-if(/SMART-TV|SmartTV|Android TV|AndroidTV|GoogleTV|BRAVIA|Tizen|Web0S|WebOS|HbbTV|AFT|CrKey/i.test(ua)||/[?&]tv=1/.test(location.search)){
- document.documentElement.classList.add('tv');
- addEventListener('load',()=>$('.btn.big').focus());
+nav.addEventListener('click',e=>{if(e.target.closest('a'))shut()});
+document.addEventListener('click',e=>{if(nav.classList.contains('open')&&!e.target.closest('#nav,#burger'))shut()});
+
+/* scrollspy menu atas + tab bar */
+const links=$$('#nav a,.tabbar a[href^="#"]:not([href="#"])');
+const secs=['beranda','game','misi','perangkat','segera','faq'].map(id=>document.getElementById(id)).filter(Boolean);
+function spy(){
+ const y=scrollY+innerHeight*.35;let cur=secs[0].id;
+ for(const s of secs)if(s.offsetTop<=y)cur=s.id;
+ links.forEach(a=>{const h=a.getAttribute('href').slice(1);a.classList.toggle('on',h===cur)});
 }
-/* D-pad: panah memindahkan fokus ke elemen terdekat pada arah tersebut; OK = Enter; Back = tutup modal */
-const sel='a[href],button:not([disabled])';
+let tk;addEventListener('scroll',()=>{if(!tk){tk=requestAnimationFrame(()=>{tk=0;spy()})}},{passive:true});spy();
+
+/* animasi muncul saat scroll */
+const rvEls=$$('.sec .head,.stats li,.cat,.steps li,.mission,.dev,.feat,.faq details,.final-in');
+rvEls.forEach((el,i)=>{el.classList.add('rv');el.style.transitionDelay=(i%4)*70+'ms'});
+if('IntersectionObserver' in window){
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+ rvEls.forEach(el=>io.observe(el));
+}else rvEls.forEach(el=>el.classList.add('in'));
+
+/* misi keluarga (tersimpan per hari di perangkat) */
+const MK='dfp-missions',today=new Date().toISOString().slice(0,10);
+let done=[];try{const s=JSON.parse(store.get(MK)||'{}');if(s.d===today)done=s.done||[]}catch(e){}
+const ms=$$('#missions .m'),GOAL=6;
+function paint(){
+ let pts=0;ms.forEach((b,i)=>{const on=done.includes(i);b.setAttribute('aria-pressed',on);if(on)pts+=+b.dataset.s});
+ $('#pval').textContent=pts+' / '+GOAL;$('#pfill').style.width=pts/GOAL*100+'%';
+ const bar=$('#pbar');bar.setAttribute('aria-valuenow',pts);
+ const r=$('#reward');r.classList.toggle('win',pts===GOAL);
+ $('#rtxt').textContent=pts===GOAL?'Hebat! Semua misi selesai — tim keluarga juara hari ini!':pts?'Bagus! Lanjutkan misi berikutnya.':'Selesaikan misi pertama untuk membuka bintang!';
+}
+ms.forEach((b,i)=>b.onclick=()=>{done=done.includes(i)?done.filter(x=>x!==i):[...done,i];store.set(MK,JSON.stringify({d:today,done}));paint()});
+paint();
+
+/* Mode TV: otomatis (UA TV), ?tv=1, atau tombol; pilihan disimpan */
+const root=document.documentElement,tvbtn=$('#tvtoggle');
+const ua=/SMART-TV|SmartTV|Android TV|AndroidTV|GoogleTV|BRAVIA|Tizen|Web0S|WebOS|HbbTV|AFT|CrKey/i.test(navigator.userAgent);
+function setTV(on,save){root.classList.toggle('tv',on);tvbtn.textContent=on?'Keluar Mode TV':'Coba Mode TV';if(save)store.set('dfp-tv',on?'1':'0');scrollTo(0,0)}
+const pref=store.get('dfp-tv'),qs=/[?&]tv=1/.test(location.search);
+const init=qs||(pref==='1')||(ua&&pref!=='0');
+root.classList.toggle('tv',init);tvbtn.textContent=init?'Keluar Mode TV':'Coba Mode TV';
+tvbtn.onclick=()=>{setTV(!root.classList.contains('tv'),true);if(root.classList.contains('tv'))$('.btn.big').focus({preventScroll:true})};
+if(init)addEventListener('load',()=>$('.btn.big').focus({preventScroll:true}));
+
+/* D-pad: panah memindahkan fokus ke elemen terdekat; OK = Enter; Back = tutup modal / ke atas */
+const sel='a[href],button:not([disabled]),summary';
 document.addEventListener('keydown',e=>{
- const k=e.key;
- if(k==='Escape'||k==='Backspace'||k==='BrowserBack'||k==='GoBack'){if(!modal.hidden){e.preventDefault();close()}else if(document.documentElement.classList.contains('tv')){e.preventDefault();scrollTo(0,0);$('.btn.big').focus()}return}
+ const k=e.key,tv=root.classList.contains('tv');
+ if(k==='Escape'||k==='Backspace'||k==='BrowserBack'||k==='GoBack'){
+  if(!modal.hidden){e.preventDefault();close()}
+  else if(nav.classList.contains('open')){shut()}
+  else if(tv&&k!=='Backspace'){e.preventDefault();scrollTo(0,0);$('.btn.big').focus()}
+  return}
  if(!/^Arrow(Left|Right|Up|Down)$/.test(k))return;
+ if(!tv)return;
  if(!modal.hidden){e.preventDefault();return}
  const cur=document.activeElement,els=$$(sel).filter(el=>el.offsetParent&&!el.closest('[hidden]'));
  if(!cur||cur===document.body){e.preventDefault();(els.find(x=>x.classList.contains('big'))||els[0]).focus();return}

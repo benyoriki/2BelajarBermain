@@ -38,3 +38,7 @@ Hero memakai karakter PNG transparan di atas `hero-jungle.webp`; 7 kategori; 8 g
 
 ## Update: hero HD & navigasi HP
 Hero memakai `assets/hero-family-play.webp` (ilustrasi HD, tepi bersih) yang menyatu dengan background jungle. Ditambah bagian "Fitur Utama" dan tab bar bawah di HP.
+
+## Update v04: Redesain UI 2026
+Tampilan baru: header kaca melayang, hero gelap dengan headline besar, strip statistik, kategori gaya bento, kartu game putih dengan status "Siap main"/"Segera", bagian "Cara Main", Misi Keluarga interaktif (ketuk misi, tersimpan per hari di `localStorage`), showcase multi perangkat, FAQ, dan CTA penutup. HP punya tab bar bawah. Smart TV: sidebar kiri + game card horizontal + fokus besar (aktif otomatis di browser TV, `?tv=1`, atau tombol "Coba Mode TV"). Font: Fredoka + Nunito (Google Fonts); jika offline otomatis memakai font sistem.
+`og:image` memakai URL absolut `https://benyoriki.github.io/2BelajarBermain/assets/preview.jpg` — ganti jika domain berubah.
