@@ -42,3 +42,9 @@ Hero memakai `assets/hero-family-play.webp` (ilustrasi HD, tepi bersih) yang men
 ## Update v04: Redesain UI 2026
 Tampilan baru: header kaca melayang, hero gelap dengan headline besar, strip statistik, kategori gaya bento, kartu game putih dengan status "Siap main"/"Segera", bagian "Cara Main", Misi Keluarga interaktif (ketuk misi, tersimpan per hari di `localStorage`), showcase multi perangkat, FAQ, dan CTA penutup. HP punya tab bar bawah. Smart TV: sidebar kiri + game card horizontal + fokus besar (aktif otomatis di browser TV, `?tv=1`, atau tombol "Coba Mode TV"). Font: Fredoka + Nunito (Google Fonts); jika offline otomatis memakai font sistem.
 `og:image` memakai URL absolut `https://benyoriki.github.io/2BelajarBermain/assets/preview.jpg` — ganti jika domain berubah.
+
+## Update v05: poles berdasarkan tampilan HP asli
+Hero HP lebih ringkas (gambar naik ke layar pertama), header lebih solid + garis progres scroll, strip marquee nama game, bagian "Game Unggulan" (link otomatis dari `GAMES[0]`), breakpoint tablet / "situs desktop" di HP (game 3 kolom, langkah 3 kolom), filter game & kartu "Segera Hadir" berupa carousel geser di HP.
+
+## Update v06
+Perbaikan: menu hamburger HP (sebelumnya terpotong), garis kosong di atas header, bagian "Satu portal, semua layar" disembunyikan di HP. Baru: loading screen 3 detik (murni CSS, ringan) dan kredit "Dikembangkan oleh tim benyoriki.com" (tautan tab baru) di loading screen & footer.

@@ -28,6 +28,18 @@ render();
 $$('.chip').forEach(c=>c.onclick=()=>setFilter(c.dataset.f));
 $$('[data-filter]').forEach(a=>a.addEventListener('click',()=>setFilter(a.dataset.filter)));
 
+/* marquee + game unggulan (diambil dari daftar GAMES) */
+$('#marq').innerHTML=[0,1].map(()=>GAMES.map(g=>`<span>${esc(g.n)}</span>`).join('')).join('');
+if(GAMES[0].href)$('#spotlink').href=GAMES[0].href;
+
+/* garis progres scroll */
+const spb=$('#sp');
+function prog(){const m=document.documentElement.scrollHeight-innerHeight;spb.style.transform='scaleX('+(m>0?Math.min(1,scrollY/m):0)+')'}
+addEventListener('scroll',()=>requestAnimationFrame(prog),{passive:true});prog();
+
+/* loading screen: dihapus dari DOM setelah animasi CSS 3 detik selesai */
+const boot=$('#boot');if(boot)setTimeout(()=>boot.remove(),3700);
+
 /* modal */
 const modal=$('#modal');let last;
 function open(t){last=document.activeElement;$('#mt').textContent=t;modal.hidden=false;$('#mx').focus()}
@@ -47,13 +59,13 @@ const links=$$('#nav a,.tabbar a[href^="#"]:not([href="#"])');
 const secs=['beranda','game','misi','perangkat','segera','faq'].map(id=>document.getElementById(id)).filter(Boolean);
 function spy(){
  const y=scrollY+innerHeight*.35;let cur=secs[0].id;
- for(const s of secs)if(s.offsetTop<=y)cur=s.id;
+ for(const s of secs)if(s.offsetParent&&s.offsetTop<=y)cur=s.id;
  links.forEach(a=>{const h=a.getAttribute('href').slice(1);a.classList.toggle('on',h===cur)});
 }
 let tk;addEventListener('scroll',()=>{if(!tk){tk=requestAnimationFrame(()=>{tk=0;spy()})}},{passive:true});spy();
 
 /* animasi muncul saat scroll */
-const rvEls=$$('.sec .head,.stats li,.cat,.steps li,.mission,.dev,.feat,.faq details,.final-in');
+const rvEls=$$('.sec .head,.stats li,.cat,.steps li,.mission,.dev,.spot,.feat,.faq details,.final-in');
 rvEls.forEach((el,i)=>{el.classList.add('rv');el.style.transitionDelay=(i%4)*70+'ms'});
 if('IntersectionObserver' in window){
  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});

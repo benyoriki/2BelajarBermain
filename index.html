@@ -15,14 +15,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="assets/hero-jungle.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
+<div id="boot" role="status" aria-live="polite" aria-label="Memuat Dino Family Play">
+  <img class="b-logo" src="assets/logo.png" alt="Dino Family Play" width="900" height="300">
+  <div class="b-dino" aria-hidden="true"><img class="bdi" src="assets/dino-blue.png" alt="" width="300" height="377"><img class="dc" src="assets/dice.svg" alt="" width="34" height="34"><img class="st" src="assets/star.svg" alt="" width="26" height="26"></div>
+  <div class="b-bar" aria-hidden="true"><i></i></div>
+  <div class="b-txt"><span>Menyiapkan papan permainan…</span><span>Membangunkan para dino…</span><span>Siap main bareng keluarga!</span></div>
+  <p class="credit b-credit">Dikembangkan oleh tim <a href="https://benyoriki.com" target="_blank" rel="noopener">benyoriki.com</a></p>
+</div>
 <a class="skip" href="#main">Lewati ke konten</a>
 
 <header class="top" id="top">
+  <i class="sp" id="sp" aria-hidden="true"></i>
   <a class="brand" href="#beranda" aria-label="Dino Family Play — beranda"><img src="assets/logo.png" alt="Dino Family Play" width="900" height="300"></a>
   <nav id="nav" aria-label="Menu utama">
     <a href="#beranda" class="on"><img src="assets/home.svg" alt="" width="20" height="20">Beranda</a>
@@ -73,6 +82,28 @@
     <li><img src="assets/devices.svg" alt="" width="52" height="52"><b>4 Perangkat</b><span>HP, tablet, PC &amp; TV</span></li>
     <li><img src="assets/bolt.svg" alt="" width="52" height="52"><b>Ringan &amp; Cepat</b><span>Tanpa instal, langsung buka</span></li>
   </ul>
+</section>
+
+<!-- MARQUEE -->
+<div class="marq-w" aria-hidden="true"><div class="marq"><div class="marq-t" id="marq"></div></div></div>
+
+<!-- GAME UNGGULAN -->
+<section class="sec" id="unggulan">
+  <div class="spot">
+    <div class="spot-copy">
+      <p class="eyebrow">Game unggulan</p>
+      <h2>Ular Tangga Dino</h2>
+      <p class="spot-d">Kocok dadu, naik tangga, hindari ular — dan jadi yang pertama sampai finis! Klasik yang bikin seisi rumah ketawa.</p>
+      <ul class="spot-tags"><li class="ok">Siap dimainkan</li><li>2–4 pemain</li><li>Game Papan</li></ul>
+      <a class="btn big" id="spotlink" href="#game"><img src="assets/button-play.svg" alt="" width="28" height="28">Mainkan Sekarang</a>
+    </div>
+    <div class="spot-art" aria-hidden="true">
+      <img class="s4" src="assets/star.svg" alt="" width="64" height="64" loading="lazy">
+      <img class="s3" src="assets/dice.svg" alt="" width="64" height="64" loading="lazy">
+      <img class="s1" src="assets/dino-blue.png" alt="" width="300" height="377" loading="lazy">
+      <img class="s2" src="assets/dino-pink.png" alt="" width="300" height="377" loading="lazy">
+    </div>
+  </div>
 </section>
 
 <!-- KATEGORI -->
@@ -186,6 +217,7 @@
   <img src="assets/logo.png" alt="Dino Family Play" class="flogo" width="900" height="300" loading="lazy">
   <p>Kumpulan game keluarga yang seru dan edukatif untuk dimainkan bersama di rumah.</p>
   <nav aria-label="Footer"><a href="#beranda">Beranda</a><a href="#game">Semua Game</a><a href="#misi">Misi Keluarga</a><a href="#perangkat">Perangkat</a><a href="#faq">Tanya Jawab</a></nav>
+  <p class="credit">Dikembangkan oleh tim <a href="https://benyoriki.com" target="_blank" rel="noopener">benyoriki.com</a></p>
   <small>BelajarBermain2.online · © 2026 Dino Family Play</small>
 </footer>
 
