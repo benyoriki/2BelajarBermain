@@ -14,7 +14,7 @@ const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelecto
 const grid=$('#games'),COL={papan:'#39D9FF',otak:'#FF70B8'};
 function render(f='all'){
  grid.innerHTML=GAMES.filter(g=>f==='all'||g.cat===f).map(g=>`<article class="game${g.href?"":" soon"}" style="--c:${COL[g.cat]||"#39D9FF"}">
- <div class="th"><img src="assets/games/${g.img}.webp" alt="Thumbnail ${g.n}" loading="lazy" width="720" height="480"><span class="badge">${g.tag}</span></div>
+ <div class="th"><img src="assets/${g.img}.webp" alt="Thumbnail ${g.n}" loading="lazy" width="720" height="480"><span class="badge">${g.tag}</span></div>
  <div class="bd"><h3>${g.n}</h3><small>${g.pl}</small><p>${g.d}</p>
  ${g.href?`<a class="btn" href="${g.href}">Mainkan</a>`:`<button class="btn" data-modal="${g.n}">Segera Hadir</button>`}</div></article>`).join('');
 }

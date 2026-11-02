@@ -3,8 +3,8 @@ HTML5 + CSS3 + JavaScript vanilla. Tanpa build, tanpa npm, siap GitHub Pages.
 
 ## Struktur
 ```
-index.html  style.css  app.js  README.md
-assets/ logo.png favicon.png preview.jpg characters/ backgrounds/ games/ icons/ ui/
+index.html  style.css  app.js  README.md  .gitignore  .nojekyll
+assets/   (semua gambar & ikon, tanpa subfolder)
 ```
 ## Upload ke GitHub Pages
 1. Ekstrak ZIP, salin **isi** folder `DinoFamilyPlay` ke root repository (index.html harus di root).
@@ -22,7 +22,7 @@ Aktif otomatis di browser TV (Android TV, Tizen, WebOS), atau tambahkan `?tv=1` 
 Aset di `assets/` berasal dari Asset Upgrade Pack 2026 (hero-family-play.webp, thumbnail game bersih, Dino Pink asli). Judul game ditulis di HTML.
 
 ## Ganti aset
-Timpa file di `assets/` dengan nama sama. Thumbnail game saat ini placeholder otomatis (`assets/games/`); karakter Dino Pink dibuat dari Dino Biru (ganti dengan ilustrasi asli bila ada).
+Timpa file di `assets/` dengan nama sama. Thumbnail game saat ini placeholder otomatis (`assets/`); karakter Dino Pink dibuat dari Dino Biru (ganti dengan ilustrasi asli bila ada).
 
 ## Tahap berikutnya
 Halaman Semua Game, Misi Keluarga & Pencapaian fungsional (localStorage), pencarian, profil pemain, thumbnail game final, audio.
@@ -37,4 +37,4 @@ Halaman Semua Game, Misi Keluarga & Pencapaian fungsional (localStorage), pencar
 Hero memakai karakter PNG transparan di atas `hero-jungle.webp`; 7 kategori; 8 game card (Petualangan Dino & Halma Dino = Segera Hadir). Mode TV: sidebar kiri, game card horizontal, fokus awal di "Mulai Bermain". Tombol Pengaturan/Pencarian/Profil saat ini membuka modal "Segera Hadir".
 
 ## Update: hero HD & navigasi HP
-Hero memakai `assets/backgrounds/hero-family-play.webp` (ilustrasi HD, tepi bersih) yang menyatu dengan background jungle. Ditambah bagian "Fitur Utama" dan tab bar bawah di HP.
+Hero memakai `assets/hero-family-play.webp` (ilustrasi HD, tepi bersih) yang menyatu dengan background jungle. Ditambah bagian "Fitur Utama" dan tab bar bawah di HP.
