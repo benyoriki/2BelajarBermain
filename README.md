@@ -1,4 +1,4 @@
-# Dino Family Play — Homepage 2026 (v13, tema "Malam di Hutan")
+# Dino Family Play — Homepage 2026 (v20, tema "Malam di Hutan")
 HTML5 + CSS3 + JavaScript vanilla. Tanpa build, tanpa npm, siap GitHub Pages.
 
 ## Struktur
@@ -97,3 +97,32 @@ Kartu pemain gaya 2026: hero aurora yang warnanya mengikuti karakter pilihan, av
 - Hero baru: latar `hero-jungle.webp` + karakter Dino, tombol kategori warna-warni, bagian "Kenapa keluarga suka".
 - Gambar kartu: `ular-tangga.webp` (logo + latar hutan) dan `monopoli.webp` (logo Monopoli Dino).
 - Bagian "Satu portal, semua layar": bingkai HP/tablet/PC/TV berisi tangkapan layar asli situs (`assets/scr-*-dark|light.webp`). Ambil ulang jika tampilan hero berubah (viewport: HP 390×844, tablet 1024×768, PC 1440×900, TV 1920×1080 `?tv=1`).
+
+## Update v16: tampilan modern ramah anak (HP, tablet, PC, Smart TV)
+- Kartu & tombol gaya "stiker" 3D (tepi bawah tebal), label bagian (eyebrow) berwarna, latar titik halus, dino melayang halus, konfeti saat semua misi selesai.
+- HP: hero diringkas (dino terlihat di layar pertama), tombol "Ular Tangga | Monopoli" berdampingan, fitur 2 kolom (halaman lebih pendek).
+- Tablet: hero 2 kolom, fitur/langkah/segera 3 kolom, kategori 4 kolom.
+- PC lebar: lebar konten naik di layar ≥1500px / ≥1900px (font ikut membesar).
+- TV: teks lebih besar, tombol berdampingan, efek blur & animasi dimatikan agar ringan.
+- Perbaikan: kilau & hati donasi sebelumnya tampil hitam (fill SVG). Hanya index.html, style.css, app.js yang berubah; folder game tidak disentuh.
+
+## Update v17
+- Dadu putih di hero diganti bintang emas berwajah lucu (SVG, melayang).
+- Bagian "Pertanyaan yang sering muncul" dihapus (HTML, CSS, menu).
+- Profil kini bagian halaman (`#profil`, antara Misi dan Perangkat), bukan jendela pop-up. Menu, tab bar HP, tombol avatar, dan kategori "Pencapaian" menuju ke sana.
+- Instal PWA: tombol unduh di header + kartu `#instal` dengan panduan HP/Tablet, iPhone/iPad, PC/Laptop, Smart TV. Baru: `manifest.json`, `service-worker.js`, `assets/icon-maskable-512.png`. PWA hanya aktif di HTTPS (GitHub Pages sudah HTTPS).
+
+## Update v18: menu = layar sendiri (seperti tab sheet)
+Portal bukan lagi satu halaman panjang. Setiap menu menampilkan layarnya sendiri (`.view`), yang lain disembunyikan; berpindah lewat hash (#game, #misi, dst), tombol Back browser tetap berfungsi, dan tautan langsung seperti `#instal` membuka layar yang tepat.
+- Beranda: hero, kategori, fitur, ajakan main · Game · Misi (+ 3 langkah) · Belajar · Profil · Perangkat (+ Instal) · Dukung.
+- Tab bar bawah (5 menu inti) tampil di HP & tablet (≤1000px); PC memakai menu atas; TV memakai sidebar.
+Untuk menambah layar baru: bungkus bagian dengan `<div class="view" data-v="nama">` dan tautkan dengan `href="#id-bagian"`.
+
+## Update v19: penyegaran kata-kata
+- Hero: judul "Seru bareng, makin dekat", deskripsi dan 4 poin keunggulan (gratis & tanpa iklan, aman anak, 2–4 pemain, bisa offline). Meta title/description/og ikut diperbarui.
+- Donasi: tampilan tetap; copy baru yang lebih menyentuh dan profesional, plus lencana komitmen (Bebas iklan 100%, Gratis, Bisa offline, Aman untuk anak). Teks jendela donasi dan footer ikut diperbarui.
+
+## Perubahan v20
+- Bagian "Jaga ruang bermain keluarga tetap gratis dan bebas iklan" (id `dukung`) kini ada di Beranda, tepat di bawah "Siap main bareng keluarga?". Menu/footer "Dukung" menggulir ke bagian itu.
+- Profil: foto profil dari galeri/kamera dengan crop bulat ala WhatsApp (geser, cubit/slider zoom, putar). Disimpan di localStorage (`dfp-photo`, JPEG 512px). Dikunci di mode TV (tidak ada pemilih file); foto tetap tampil.
+- Perbaikan layout: catatan donasi di HP, kartu "Segera" 360px, streak mingguan, kartu fitur ganjil, skala Smart TV 960/1280.

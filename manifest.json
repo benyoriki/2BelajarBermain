@@ -1,0 +1,38 @@
+{
+ "id": "./",
+ "name": "Dino Family Play",
+ "short_name": "Dino Play",
+ "description": "Game keluarga seru: Ular Tangga dan Monopoli versi Dino untuk HP, tablet, PC & TV.",
+ "lang": "id",
+ "start_url": "./?source=pwa",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "any",
+ "background_color": "#080C24",
+ "theme_color": "#080C24",
+ "categories": [
+  "games",
+  "kids",
+  "education"
+ ],
+ "icons": [
+  {
+   "src": "assets/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "assets/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "assets/icon-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}
