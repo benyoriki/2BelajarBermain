@@ -1,57 +1,93 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Dino Family Play — Game Keluarga Seru & Edukatif untuk HP, Tablet, PC & TV</title>
-<meta name="description" content="Dino Family Play: portal game keluarga untuk 2–6 pemain. Ular tangga, monopoli, kuis, dan lebih banyak lagi. Langsung main di HP, tablet, laptop, dan TV tanpa instal.">
-<meta name="theme-color" content="#0A1240">
+<title>Dino Family Play — Game Keluarga Seru untuk HP, Tablet, PC & TV</title>
+<meta name="description" content="Dino Family Play: Ular Tangga dan Monopoli versi Dino untuk 2–4 pemain. Main bareng keluarga di HP, tablet, laptop, atau TV — gratis, tanpa instal.">
+<meta name="theme-color" content="#080C24">
+<meta name="color-scheme" content="dark light">
 <meta property="og:title" content="Dino Family Play — Malam Keluarga Jadi Lebih Seru">
-<meta property="og:description" content="Bermain Bersama, Belajar Bersama, Tumbuh Bersama Keluarga. Main di HP, tablet, laptop & TV.">
+<meta property="og:description" content="Ular Tangga dan Monopoli versi Dino. Main bareng keluarga di HP, tablet, laptop & TV.">
 <meta property="og:image" content="https://benyoriki.github.io/2BelajarBermain/assets/preview.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="assets/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preload" as="font" type="font/woff2" href="assets/fredoka.woff2" crossorigin>
 <link rel="preload" as="image" href="assets/hero-jungle.webp" fetchpriority="high">
-<link rel="preload" as="image" href="assets/logo.png">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<script>
+/* tema: pilihan tersimpan → mengikuti sistem → gelap. Dijalankan sebelum cat pertama agar tidak berkedip. */
+(function(){var d=document.documentElement,t=null;try{t=localStorage.getItem('dfp-theme')}catch(e){}
+if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark'}
+d.setAttribute('data-theme',t);d.classList.add('js');
+var m=document.querySelector('meta[name=theme-color]');if(m)m.content=t==='light'?'#F6F3FF':'#080C24'})();
+</script>
 <link rel="stylesheet" href="style.css">
-<script>document.documentElement.classList.add('js');try{var q=location.search,r=document.referrer,u=r&&new URL(r);if(!/[?&]boot=1/.test(q)&&(location.hash==='#game'||(u&&u.origin===location.origin&&u.pathname!==location.pathname)))document.documentElement.classList.add('nb')}catch(e){}</script>
 </head>
 <body>
-<div id="boot" role="status" aria-live="polite" aria-label="Memuat Dino Family Play">
-  <div class="b-stars" aria-hidden="true"><i class="tw" style="left:12%;top:14%;--s:14px;--d:0s"></i><i class="tw" style="left:84%;top:10%;--s:18px;--d:0.5s"></i><i class="tw" style="left:8%;top:46%;--s:10px;--d:1.1s"></i><i class="tw" style="left:92%;top:40%;--s:12px;--d:0.3s"></i><i class="tw" style="left:20%;top:78%;--s:16px;--d:0.8s"></i><i class="tw" style="left:78%;top:74%;--s:12px;--d:1.4s"></i><i class="tw" style="left:50%;top:6%;--s:10px;--d:0.9s"></i></div>
-  <img class="b-logo" src="assets/logo.png" alt="Dino Family Play" width="900" height="300">
-  <p class="b-tag" aria-hidden="true">Game keluarga seru untuk semua layar</p>
-  <div class="b-line" aria-hidden="true"><span style="--d:0.05s"><img src="assets/dino-green.png" alt="" width="449" height="520"></span><span style="--d:0.15s"><img src="assets/dino-red.png" alt="" width="492" height="520"></span><span style="--d:0.25s"><img src="assets/dino-yellow.png" alt="" width="404" height="520"></span><span style="--d:0.35s"><img src="assets/dino-pink.png" alt="" width="395" height="520"></span><span style="--d:0.45s"><img src="assets/dino-pterodactyl.png" alt="" width="300" height="300"></span></div>
-  <div class="b-track" aria-hidden="true">
-    <div class="b-token"><img src="assets/dino-blue.png" alt="" width="395" height="520"></div>
-    <div class="b-tiles"><i style="--i:0;--h:168">1</i><i style="--i:1;--h:192">2</i><i style="--i:2;--h:218">3</i><i style="--i:3;--h:248">4</i><i style="--i:4;--h:280">5</i><i style="--i:5;--h:318">6</i><i style="--i:6;--h:350">7</i><i style="--i:7;--h:18">8</i><i style="--i:8;--h:42">9</i><i class="fin"><img class="b-goal" src="assets/trophy.svg" alt="" width="64" height="64"></i></div>
-  </div>
-  <div class="b-txt" aria-hidden="true"><span>Menyiapkan papan permainan…</span><span>Membangunkan para dino…</span><span>Siap main bareng keluarga!</span></div>
-  <p class="credit b-credit">Dikembangkan oleh tim <a href="https://benyoriki.com" target="_blank" rel="noopener">benyoriki.com</a></p>
-</div>
+
+<!-- Ikon: satu sprite duotone, dipakai ulang lewat <use> (ringan, ikut warna teks) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.500 12 3l9 7.500V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+<symbol id="i-board" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><path fill="none" d="M3 9h18M3 15h18M9 3v18M15 3v18"/></symbol>
+<symbol id="i-pad" viewBox="0 0 24 24"><path d="M17.320 5H6.680a4 4 0 0 0-3.980 3.590C2.600 9.420 2 14.460 2 16a3 3 0 0 0 3 3c1 0 1.500-.5 2-1l1.410-1.410A2 2 0 0 1 9.830 16h4.340a2 2 0 0 1 1.410.590L17 18c.5.500 1 1 2 1a3 3 0 0 0 3-3c0-1.550-.600-6.580-.690-7.260A4 4 0 0 0 17.320 5z"/><path fill="none" d="M6 11h4M8 9v4M15 12h.01M18 10h.01"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2.500 2.900 6 6.600.9-4.800 4.600 1.200 6.500L12 17.300 6.100 20.500l1.200-6.500L2.500 9.400l6.600-.9z"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/><path fill="none" d="M12 7v14"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20.500c0-4 3.600-6.500 8-6.500s8 2.500 8 6.500z"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.500"/><path d="M2.500 20c0-3.500 3-5.500 6.500-5.500s6.500 2 6.500 5.500z"/><circle cx="17" cy="9" r="2.800"/><path fill="none" d="M17.500 14.200c2.500.3 4.500 1.900 4.500 4.800h-3"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.200"/><path fill="none" d="M12 2.500v2M12 19.500v2M4.900 4.900l1.400 1.400M17.700 17.700l1.400 1.400M2.500 12h2M19.500 12h2M4.900 19.100l1.400-1.400M17.700 6.300l1.400-1.400"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.500 14.500A8.500 8.500 0 0 1 9.500 3.500a8.500 8.500 0 1 0 11 11z"/><path fill="none" d="M17 3.500v3M15.500 5h3"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path fill-opacity="1" d="M7.500 4.500v15l12.500-7.500z"/></symbol>
+<symbol id="i-dice" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><g fill-opacity="1" stroke="none"><circle cx="8.500" cy="8.500" r="1.300"/><circle cx="15.500" cy="8.500" r="1.300"/><circle cx="12" cy="12" r="1.300"/><circle cx="8.500" cy="15.500" r="1.300"/><circle cx="15.500" cy="15.500" r="1.300"/></g></symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M12 2.500a6.500 6.500 0 0 0-3.700 11.800c.5.400.7 1 .7 1.700h6c0-.7.200-1.300.7-1.700A6.500 6.500 0 0 0 12 2.500z"/><path fill="none" d="M9.500 18.500h5M10.500 21.500h3"/></symbol>
+<symbol id="i-puzzle" viewBox="0 0 24 24"><path d="M10 3.500a2 2 0 1 1 4 0V6h4.500v4H16a2 2 0 1 0 0 4h2.500v6.500h-6.500V18a2 2 0 1 0-4 0v2.500H3V14h2.500a2 2 0 1 0 0-4H3V6h7z"/></symbol>
+<symbol id="i-video" viewBox="0 0 24 24"><rect x="2.500" y="4.500" width="19" height="15" rx="4.500"/><path d="M10 9v6l5-3z"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4.500" width="18" height="16.500" rx="4.500"/><path fill="none" d="M8 2.500v4M16 2.500v4M3 10h18M9 15.200l2.200 2.200 4-4.200"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 3h10v6a5 5 0 0 1-10 0z"/><path fill="none" d="M7 5H4v2a3 3 0 0 0 3 3M17 5h3v2a3 3 0 0 1-3 3M12 14v4M8 21h8M9.500 18h5"/></symbol>
+<symbol id="i-wifi" viewBox="0 0 24 24"><path fill="none" d="M2 9a15 15 0 0 1 20 0M5 12.500a10 10 0 0 1 14 0M8.500 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.500" r="1.300" fill-opacity="1"/></symbol>
+<symbol id="i-devices" viewBox="0 0 24 24"><rect x="2" y="4" width="15" height="10.500" rx="2.500"/><path fill="none" d="M6 18.500h7M9.500 14.500v4"/><rect x="16" y="9" width="6" height="11" rx="2"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.500s-8.500-5-8.500-11A4.800 4.800 0 0 1 12 6.800a4.800 4.800 0 0 1 8.500 2.700c0 6-8.500 11-8.500 11z"/></symbol>
+<symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.400 0 2-1 1.500-2.200-.5-1.200.2-2.300 1.500-2.300h2A4 4 0 0 0 21 12.500C21 7 17 3 12 3z"/><g fill-opacity="1" stroke="none"><circle cx="7.500" cy="11" r="1.200"/><circle cx="10" cy="7" r="1.200"/><circle cx="15" cy="7.500" r="1.200"/></g></symbol>
+<symbol id="i-music" viewBox="0 0 24 24"><path fill="none" d="M9 18V5l11-2v13"/><circle cx="6.500" cy="18" r="2.800"/><circle cx="17.500" cy="16" r="2.800"/></symbol>
+<symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.700 6.300a1 1 0 0 0 0 1.400l1.600 1.600a1 1 0 0 0 1.400 0l3.770-3.770a6 6 0 0 1-7.940 7.940l-6.910 6.910a2.120 2.120 0 0 1-3-3l6.910-6.910a6 6 0 0 1 7.940-7.940l-3.760 3.760z"/></symbol>
+<symbol id="i-share" viewBox="0 0 24 24"><path fill="none" d="M12 15V3.500M7.500 7.500 12 3l4.500 4.500M5 12.500v6A2.500 2.500 0 0 0 7.500 21h9a2.500 2.500 0 0 0 2.500-2.500v-6"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path fill="none" d="M6 6l12 12M18 6 6 18"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="3"/><path fill="none" d="M5.500 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.500"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path fill="none" d="M12 3.500v12M7 11l5 5 5-5M4.500 20.500h15"/></symbol>
+<symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><path fill="none" d="M14 14h3v3h-3zM20 14v.01M14 20h3M20 17v4"/></symbol>
+<symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 9.500 12 4l9 5.500z"/><path fill="none" d="M5.500 12.500v5.500M10 12.500v5.500M14 12.500v5.500M18.500 12.500v5.500M3 21h18"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.500 4.500 13.500H11l-1 8 8.500-11H12z"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-tv" viewBox="0 0 24 24"><rect x="2.500" y="4" width="19" height="13" rx="3"/><path fill="none" d="M8 21h8M12 17v4"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><rect x="6.500" y="2.500" width="11" height="19" rx="3"/><path fill="none" d="M10.500 18.500h3"/></symbol>
+<symbol id="i-tablet" viewBox="0 0 24 24"><rect x="2.500" y="5" width="19" height="14" rx="3.500"/><path fill="none" d="M18.500 12h.01"/></symbol>
+<symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4.500" y="5" width="15" height="10.500" rx="2"/><path fill="none" d="M2 19h20"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke-width="2.600" d="M5 12.500l4.500 4.500L19 7.500"/></symbol>
+<symbol id="i-cap" viewBox="0 0 24 24"><path d="M2 9.500 12 5l10 4.500-10 4.500z"/><path fill="none" d="M6 12v4.500c0 1.400 2.700 2.500 6 2.500s6-1.100 6-2.500V12M22 9.500v5"/></symbol>
+<symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path fill="none" d="M9.500 9.500a2.500 2.500 0 1 1 3.500 2.300c-.7.400-1 .9-1 1.700M12 17v.01"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.800 5.200L19 10l-5.200 1.800L12 17l-1.800-5.200L5 10l5.200-1.800z"/><path d="M19 16l.8 2.200L22 19l-2.200.8L19 22l-.8-2.200L16 19l2.200-.8z"/></symbol>
+</defs></svg>
+
 <a class="skip" href="#main">Lewati ke konten</a>
 
 <header class="top" id="top">
   <i class="sp" id="sp" aria-hidden="true"></i>
   <a class="brand" href="#beranda" aria-label="Dino Family Play — beranda"><img src="assets/logo.png" alt="Dino Family Play" width="900" height="300"></a>
   <nav id="nav" aria-label="Menu utama">
-    <a href="#beranda" class="on"><img src="assets/home.svg" alt="" width="20" height="20">Beranda</a>
-    <a href="#game"><img src="assets/game-board.svg" alt="" width="20" height="20">Semua Game</a>
-    <a href="#misi"><img src="assets/star.svg" alt="" width="20" height="20">Misi Keluarga</a>
-    <a href="#perangkat"><img src="assets/devices.svg" alt="" width="20" height="20">Perangkat</a>
-    <a href="#segera"><img src="assets/learning.svg" alt="" width="20" height="20">Belajar</a>
-    <a href="#faq"><img src="assets/story.svg" alt="" width="20" height="20">Tanya Jawab</a>
-    <a href="#dukung" class="nav-dukung"><img src="assets/heart.svg" alt="" width="20" height="20">Dukung</a>
+    <a href="#beranda" class="on"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg>Beranda</a>
+    <a href="#game"><svg class="ic" aria-hidden="true"><use href="#i-board"/></svg>Game</a>
+    <a href="#misi"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg>Misi</a>
+    <a href="#perangkat"><svg class="ic" aria-hidden="true"><use href="#i-devices"/></svg>Perangkat</a>
+    <a href="#segera"><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg>Belajar</a>
+    <a href="#faq"><svg class="ic" aria-hidden="true"><use href="#i-help"/></svg>Tanya Jawab</a>
+    <a href="#dukung" class="nav-dukung"><svg class="ic" aria-hidden="true"><use href="#i-heart"/></svg>Dukung</a>
   </nav>
   <div class="tools">
-    <button class="icon-btn" data-modal="Pencarian" aria-label="Cari game"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="M15 15l6 6"/></svg></button>
-    <button class="icon-btn prof-btn" type="button" data-profile aria-label="Profil pemain"><img class="pf-av" src="assets/dino-blue.png" alt="" width="30" height="30"></button>
-    <a class="btn sm play-top" href="#game">Mainkan</a>
-    <button class="icon-btn burger" id="burger" aria-label="Buka menu" aria-expanded="false" aria-controls="nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <button class="icon-btn theme-btn" id="theme" type="button" aria-label="Ganti ke tema terang" title="Ganti tema"><svg class="ic t-sun" aria-hidden="true"><use href="#i-sun"/></svg><svg class="ic t-moon" aria-hidden="true"><use href="#i-moon"/></svg></button>
+    <button class="icon-btn prof-btn" type="button" data-profile aria-label="Profil pemain"><img class="pf-av" src="assets/dino-blue.webp" alt="" width="30" height="30"></button>
+    <a class="btn sm play-top" href="#game"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Mainkan</a>
+    <button class="icon-btn burger" id="burger" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="nav"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
   </div>
 </header>
 
@@ -59,109 +95,94 @@
 
 <!-- HERO -->
 <section class="hero" id="beranda">
-  <div class="hero-in">
+  <div class="hero-card">
     <div class="hero-copy">
-      <p class="pill"><img src="assets/dice.svg" alt="" width="22" height="22">Portal game keluarga</p>
-      <h1>Malam keluarga jadi <em>lebih seru</em> bareng Dino!</h1>
-      <p class="lead">Kumpulan game untuk <b>2–6 pemain</b> — dari ular tangga sampai kuis. Buka di HP, tablet, laptop, atau TV, <b>langsung main tanpa instal</b>.</p>
-      <div class="cta">
-        <a class="btn big" href="#game"><img src="assets/button-play.svg" alt="" width="28" height="28">Mulai Bermain</a>
-        <a class="btn ghost" href="#misi">Misi Keluarga</a>
-      </div>
-      <ul class="ticks" aria-label="Keunggulan">
-        <li>Minimal 2 pemain</li><li>Seru &amp; edukatif</li><li>HP · Tablet · PC · TV</li>
+      <p class="pill"><i class="live" aria-hidden="true"></i>2 game siap dimainkan</p>
+      <h1>Malam keluarga jadi lebih seru</h1>
+      <p class="lead">Ular Tangga dan Monopoli versi Dino. Buka di HP, tablet, laptop, atau TV — tanpa instal, tanpa daftar.</p>
+      <ul class="ticks">
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Kumpulan game keluarga</li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Minimal 2 pemain</li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Seru, edukatif &amp; interaktif</li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Gratis di HP, tablet, PC &amp; TV</li>
       </ul>
+      <div class="cta">
+        <a class="btn big" data-play data-g="0" href="#game"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Main Ular Tangga</a>
+        <a class="btn big alt" data-play data-g="1" href="#game"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Main Monopoli</a>
+      </div>
     </div>
-    <figure class="hero-art">
-      <div class="frame"><img src="assets/hero-family-play.webp" alt="Keluarga Dino biru, pink, merah, kuning, dan hijau bermain papan permainan di hutan" width="1672" height="941" fetchpriority="high"></div>
-      <span class="float f1"><img src="assets/dice.svg" alt="" width="28" height="28">Ular Tangga <b>siap main</b></span>
-      <span class="float f2"><img src="assets/star.svg" alt="" width="28" height="28">Kumpulkan bintang</span>
-      <img class="mascot" src="assets/dino-pterodactyl.png" alt="" width="300" height="295">
-    </figure>
-  </div>
-</section>
-
-<!-- STATS -->
-<section class="stats-sec" aria-label="Ringkasan">
-  <ul class="stats">
-    <li><img src="assets/game-board.svg" alt="" width="52" height="52"><b>8 Game</b><span>2 siap main, 6 segera hadir</span></li>
-    <li><img src="assets/teamwork.svg" alt="" width="52" height="52"><b>2–6 Pemain</b><span>Seru dimainkan bersama</span></li>
-    <li><img src="assets/devices.svg" alt="" width="52" height="52"><b>4 Perangkat</b><span>HP, tablet, PC &amp; TV</span></li>
-    <li><img src="assets/bolt.svg" alt="" width="52" height="52"><b>Ringan &amp; Cepat</b><span>Tanpa instal, langsung buka</span></li>
-  </ul>
-</section>
-
-<!-- MARQUEE -->
-<div class="marq-w" aria-hidden="true"><div class="marq"><div class="marq-t" id="marq"></div></div></div>
-
-<!-- GAME UNGGULAN -->
-<section class="sec" id="unggulan">
-  <div class="spot">
-    <div class="spot-copy">
-      <p class="eyebrow">Game unggulan</p>
-      <h2>Ular Tangga Dino</h2>
-      <p class="spot-d">Kocok dadu, naik tangga, hindari ular — dan jadi yang pertama sampai finis! Klasik yang bikin seisi rumah ketawa.</p>
-      <ul class="spot-tags"><li class="ok">Siap dimainkan</li><li>2–4 pemain</li><li>Game Papan</li></ul>
-      <a class="btn big" id="spotlink" href="#game"><img src="assets/button-play.svg" alt="" width="28" height="28">Mainkan Sekarang</a>
-    </div>
-    <div class="spot-art" aria-hidden="true">
-      <img class="s4" src="assets/star.svg" alt="" width="64" height="64" loading="lazy">
-      <img class="s3" src="assets/dino-pterodactyl.png" alt="" width="300" height="295" loading="lazy">
-      <div class="trio"><img src="assets/dino-green.png" alt="" width="449" height="520" loading="lazy"><img src="assets/dino-red.png" alt="" width="492" height="520" loading="lazy"><img src="assets/dino-yellow.png" alt="" width="404" height="520" loading="lazy"></div>
-      <img class="s1" src="assets/dino-blue.png" alt="" width="395" height="520" loading="lazy">
-      <img class="s2" src="assets/dino-pink.png" alt="" width="395" height="520" loading="lazy">
+    <div class="crew" aria-hidden="true">
+      <img class="c c-pink" src="assets/dino-pink.webp" alt="" width="319" height="420">
+      <img class="c c-yellow" src="assets/dino-yellow.webp" alt="" width="326" height="420">
+      <img class="c c-green" src="assets/dino-green.webp" alt="" width="363" height="420">
+      <img class="c c-blue" src="assets/dino-blue.webp" alt="" width="319" height="420">
+      <img class="c c-red" src="assets/dino-red.webp" alt="" width="397" height="420">
+      <img class="c c-ptero" src="assets/dino-pterodactyl.webp" alt="" width="300" height="295">
+      <svg class="dice" viewBox="0 0 24 24"><use href="#i-dice"/></svg>
+      <svg class="spk s1" viewBox="0 0 24 24"><use href="#i-spark"/></svg>
+      <svg class="spk s2" viewBox="0 0 24 24"><use href="#i-spark"/></svg>
     </div>
   </div>
-</section>
-
-<!-- KATEGORI -->
-<section class="sec" id="kategori">
-  <div class="head"><p class="eyebrow">Pilih gaya mainmu</p><h2>Mau main apa hari ini?</h2></div>
-  <div class="cats">
-    <a class="cat c-big" style="--c:#7C4DFF" href="#game" data-filter="papan"><img class="ic" src="assets/game-board.svg" alt="" width="60" height="60"><img class="peek" src="assets/dino-yellow.png" alt="" loading="lazy" width="404" height="520"><b>Game Papan</b><span>Ular Tangga, Monopoli, Ludo — klasik yang selalu bikin ketawa.</span></a>
-    <a class="cat" style="--c:#F0489A" href="#game" data-filter="otak"><img class="ic" src="assets/brain.svg" alt="" width="48" height="48"><img class="peek" src="assets/dino-pink.png" alt="" loading="lazy" width="395" height="520"><b>Adu Otak</b><span>Memori, tebak gambar, kuis</span></a>
-    <a class="cat" style="--c:#16A34A" href="#misi"><img class="ic" src="assets/teamwork.svg" alt="" width="48" height="48"><img class="peek" src="assets/dino-green.png" alt="" loading="lazy" width="449" height="520"><b>Kerja Sama</b><span>Selesaikan tantangan bersama</span></a>
-    <a class="cat" style="--c:#2563EB" href="#segera"><img class="ic" src="assets/learning.svg" alt="" width="48" height="48"><img class="peek" src="assets/dino-blue.png" alt="" loading="lazy" width="395" height="520"><b>Belajar Seru</b><span>Hitung, baca, dan logika</span></a>
-    <a class="cat" style="--c:#C026D3" href="#segera"><img class="ic" src="assets/story.svg" alt="" width="48" height="48"><img class="peek" src="assets/dino-pterodactyl.png" alt="" loading="lazy" width="300" height="295"><b>Cerita Interaktif</b><span>Pilih jalan ceritamu</span></a>
-    <a class="cat c-wide" style="--c:#EA7A0A" href="#misi"><img class="ic" src="assets/mission.svg" alt="" width="48" height="48"><img class="peek" src="assets/dino-red.png" alt="" loading="lazy" width="492" height="520"><b>Misi Keluarga</b><span>Aktivitas harian bersama, kumpulkan bintang</span></a>
-    <a class="cat c-wide" style="--c:#CA8A04" href="#segera"><img class="ic" src="assets/trophy.svg" alt="" width="48" height="48"><img class="peek" src="assets/dino-yellow.png" alt="" loading="lazy" width="404" height="520"><b>Pencapaian</b><span>Bintang, level, dan hadiah</span></a>
-  </div>
+  <nav class="cats" aria-label="Kategori cepat">
+    <a class="cat" style="--c1:#9B7BFF;--c2:#5B2EE6;--c3:#3B1BA8" href="#game" data-filter="papan"><i><svg class="ic" aria-hidden="true"><use href="#i-dice"/></svg></i>Game Papan</a>
+    <a class="cat" style="--c1:#FF7FB0;--c2:#E6307F;--c3:#9E1A55" href="#game" data-filter="otak"><i><svg class="ic" aria-hidden="true"><use href="#i-bulb"/></svg></i>Adu Otak</a>
+    <a class="cat" style="--c1:#3EE0A8;--c2:#0FA36B;--c3:#0A7048" href="#misi"><i><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg></i>Kerja Sama</a>
+    <a class="cat" style="--c1:#59A8FF;--c2:#2563EB;--c3:#173F9E" href="#segera"><i><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg></i>Belajar Seru</a>
+    <a class="cat" style="--c1:#EE8CFF;--c2:#C026D3;--c3:#85179A" href="#segera"><i><svg class="ic" aria-hidden="true"><use href="#i-video"/></svg></i>Cerita Interaktif</a>
+    <a class="cat" style="--c1:#FFB84A;--c2:#F26A10;--c3:#AE470A" href="#misi"><i><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg></i>Misi Keluarga</a>
+    <a class="cat gold" style="--c1:#FFE066;--c2:#F5A300;--c3:#B07300" href="#" data-profile><i><svg class="ic" aria-hidden="true"><use href="#i-trophy"/></svg></i>Pencapaian</a>
+  </nav>
 </section>
 
 <!-- GAME -->
 <section class="sec" id="game">
-  <div class="head row"><div><p class="eyebrow">Perpustakaan game</p><h2>Petualangan Favorit Keluarga</h2></div>
+  <div class="head row rv"><div><h2>Pilih game malam ini</h2><p class="sub">Dua game sudah siap. Sisanya sedang dibuat satu per satu.</p></div>
   <div class="chips" role="group" aria-label="Filter game">
-    <button class="chip on" data-f="all" aria-pressed="true">Semua</button><button class="chip" data-f="ready" aria-pressed="false">Siap Main</button><button class="chip" data-f="papan" aria-pressed="false">Papan</button><button class="chip" data-f="otak" aria-pressed="false">Adu Otak</button>
+    <button class="chip on" data-f="all" aria-pressed="true">Semua</button><button class="chip" data-f="ready" aria-pressed="false">Siap main</button><button class="chip" data-f="papan" aria-pressed="false">Papan</button><button class="chip" data-f="otak" aria-pressed="false">Adu otak</button>
   </div></div>
   <div class="games" id="games" aria-live="polite"></div>
 </section>
 
+<!-- FITUR -->
+<section class="sec" id="fitur">
+  <div class="head rv"><h2>Kenapa keluarga suka</h2><p class="sub">Dibuat sederhana, ringan, dan aman untuk semua usia.</p></div>
+  <ul class="feat-grid">
+    <li class="rv" style="--c1:#9B7BFF;--c2:#5B2EE6"><span class="tile"><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg></span><b>Minimal 2 pemain</b><small>Pas untuk berdua, seru sampai 4 orang.</small></li>
+    <li class="rv" style="--c1:#FFB84A;--c2:#F26A10"><span class="tile"><svg class="ic" aria-hidden="true"><use href="#i-dice"/></svg></span><b>Banyak pilihan game</b><small>Papan, adu otak, dan petualangan.</small></li>
+    <li class="rv" style="--c1:#59A8FF;--c2:#2563EB"><span class="tile"><svg class="ic" aria-hidden="true"><use href="#i-cap"/></svg></span><b>Edukasi &amp; belajar</b><small>Belajar lewat permainan yang menyenangkan.</small></li>
+    <li class="rv" style="--c1:#3EE0A8;--c2:#0FA36B"><span class="tile"><svg class="ic" aria-hidden="true"><use href="#i-puzzle"/></svg></span><b>Kerja sama tim</b><small>Tantangan yang diselesaikan bersama.</small></li>
+    <li class="rv" style="--c1:#EE8CFF;--c2:#C026D3"><span class="tile"><svg class="ic" aria-hidden="true"><use href="#i-video"/></svg></span><b>Cerita interaktif</b><small>Keluarga memilih jalan ceritanya.</small></li>
+    <li class="rv" style="--c1:#FF7FB0;--c2:#E6307F"><span class="tile"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg></span><b>Misi keluarga</b><small>Misi harian dengan bintang hadiah.</small></li>
+    <li class="rv" style="--c1:#FFE066;--c2:#F5A300"><span class="tile"><svg class="ic" aria-hidden="true"><use href="#i-trophy"/></svg></span><b>Pencapaian &amp; hadiah</b><small>Kumpulkan level dan lencana.</small></li>
+    <li class="rv" style="--c1:#4FD6EE;--c2:#0A8FB0"><span class="tile"><svg class="ic" aria-hidden="true"><use href="#i-wifi"/></svg></span><b>Bisa offline</b><small>Ular Tangga siap offline setelah dibuka sekali.</small></li>
+    <li class="rv" style="--c1:#8B9BFF;--c2:#3D4FD8"><span class="tile"><svg class="ic" aria-hidden="true"><use href="#i-devices"/></svg></span><b>Multi perangkat</b><small>HP, tablet, PC, dan Smart TV.</small></li>
+  </ul>
+</section>
+
 <!-- CARA MAIN -->
 <section class="sec" id="cara">
-  <div class="head center"><p class="eyebrow">Gampang banget</p><h2>Mulai main dalam 3 langkah</h2></div>
+  <div class="head rv"><h2>Mulai main dalam 3 langkah</h2></div>
   <ol class="steps">
-    <li><span class="n">1</span><img src="assets/game-board.svg" alt="" width="64" height="64" loading="lazy"><h3>Pilih game</h3><p>Pilih game papan atau adu otak yang paling cocok untuk suasana malam ini.</p></li>
-    <li><span class="n">2</span><img src="assets/teamwork.svg" alt="" width="64" height="64" loading="lazy"><h3>Kumpulkan keluarga</h3><p>Ajak 2–6 pemain. Satu layar cukup — HP, tablet, laptop, atau TV.</p></li>
-    <li><span class="n">3</span><img src="assets/trophy.svg" alt="" width="64" height="64" loading="lazy"><h3>Main &amp; kumpulkan bintang</h3><p>Selesaikan misi bersama, kumpulkan bintang, dan rayakan kemenangan keluarga.</p></li>
+    <li class="rv"><span class="n">1</span><div><h3>Pilih game</h3><p>Ular Tangga untuk yang ingin santai, Monopoli untuk yang suka bersaing.</p></div></li>
+    <li class="rv"><span class="n">2</span><div><h3>Kumpulkan keluarga</h3><p>Ajak 2–4 pemain. Satu layar cukup: HP, tablet, laptop, atau TV.</p></div></li>
+    <li class="rv"><span class="n">3</span><div><h3>Main dan kumpulkan bintang</h3><p>Selesaikan misi harian bersama, lalu rayakan kemenangannya.</p></div></li>
   </ol>
 </section>
 
 <!-- MISI -->
 <section class="sec" id="misi">
-  <div class="mission">
-    <div class="mission-art" aria-hidden="true"><img src="assets/dino-green.png" alt="" width="449" height="520" loading="lazy"><img src="assets/dino-pink.png" alt="" width="395" height="520" loading="lazy"></div>
+  <div class="mission rv">
+    <div class="mission-art" aria-hidden="true"><img src="assets/dino-green.webp" alt="" width="363" height="420" loading="lazy"><img src="assets/dino-pink.webp" alt="" width="319" height="420" loading="lazy"></div>
     <div class="mission-body">
-      <p class="eyebrow light">Misi hari ini</p>
-      <h2>Jadilah Tim Keluarga!</h2>
+      <h2>Misi keluarga hari ini</h2>
       <p class="sub">Ketuk misi yang sudah kalian selesaikan. Progres tersimpan di perangkat ini dan diatur ulang setiap hari.</p>
       <ul class="missions" id="missions">
-        <li><button type="button" class="m" data-s="1" aria-pressed="false"><img src="assets/game-board.svg" alt="" width="48" height="48"><span class="mt"><b>Main bersama</b><small>Satu ronde game papan malam ini</small></span><i>+1 ★</i><em class="ck" aria-hidden="true"></em></button></li>
-        <li><button type="button" class="m" data-s="2" aria-pressed="false"><img src="assets/learning.svg" alt="" width="48" height="48"><span class="mt"><b>Belajar bersama</b><small>Jawab 5 kuis sebagai satu tim</small></span><i>+2 ★</i><em class="ck" aria-hidden="true"></em></button></li>
-        <li><button type="button" class="m" data-s="3" aria-pressed="false"><img src="assets/teamwork.svg" alt="" width="48" height="48"><span class="mt"><b>Kerja sama</b><small>Selesaikan tantangan tanpa saling skip</small></span><i>+3 ★</i><em class="ck" aria-hidden="true"></em></button></li>
+        <li><button type="button" class="m" data-s="1" aria-pressed="false"><span class="tile" style="--c1:#9B7BFF;--c2:#5B2EE6"><svg class="ic" aria-hidden="true"><use href="#i-board"/></svg></span><span class="mt"><b>Main bersama</b><small>Satu ronde game papan malam ini</small></span><i>+1 ★</i><em class="ck" aria-hidden="true"></em></button></li>
+        <li><button type="button" class="m" data-s="2" aria-pressed="false"><span class="tile" style="--c1:#59A8FF;--c2:#2563EB"><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg></span><span class="mt"><b>Belajar bersama</b><small>Jawab 5 kuis sebagai satu tim</small></span><i>+2 ★</i><em class="ck" aria-hidden="true"></em></button></li>
+        <li><button type="button" class="m" data-s="3" aria-pressed="false"><span class="tile" style="--c1:#3EE0A8;--c2:#0FA36B"><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg></span><span class="mt"><b>Kerja sama</b><small>Selesaikan tantangan tanpa saling skip</small></span><i>+3 ★</i><em class="ck" aria-hidden="true"></em></button></li>
       </ul>
-      <div class="progress"><div class="pl"><b>Bintang hari ini</b><span id="pval">0 / 6</span></div><div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0" id="pbar"><i id="pfill" style="width:0"></i></div></div>
-      <p class="reward" id="reward"><img src="assets/trophy.svg" alt="" width="34" height="34"><span id="rtxt">Selesaikan misi pertama untuk membuka bintang!</span></p>
+      <div class="progress"><div class="pl"><b>Bintang hari ini</b><span id="pval">0 / 6</span></div><div class="bar" role="progressbar" aria-label="Bintang hari ini" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0" id="pbar"><i id="pfill" style="width:0"></i></div></div>
+      <p class="reward" id="reward"><svg class="ic" aria-hidden="true"><use href="#i-trophy"/></svg><span id="rtxt">Selesaikan misi pertama untuk membuka bintang!</span></p>
     </div>
   </div>
 </section>
@@ -169,65 +190,63 @@
 <!-- PERANGKAT -->
 <section class="sec" id="perangkat">
   <div class="dev">
-    <div class="dev-copy">
-      <p class="eyebrow">Multi perangkat</p>
+    <div class="dev-copy rv">
       <h2>Satu portal, semua layar</h2>
-      <p class="lead2">Tampilan menyesuaikan otomatis. Di TV, menu pindah ke samping dan semua bisa dikendalikan dengan remote.</p>
+      <p class="sub">Tampilan menyesuaikan diri otomatis. Di TV, menu pindah ke samping dan semuanya bisa dikendalikan dengan remote.</p>
       <ul class="dev-list">
-        <li><b>HP</b><span>Tombol besar &amp; menu bawah, nyaman satu tangan</span></li>
-        <li><b>Tablet</b><span>Kartu game 2–3 kolom, pas untuk main berdua</span></li>
-        <li><b>Laptop / PC</b><span>Tampilan lega dengan semua game sekaligus</span></li>
-        <li><b>Smart TV</b><span>Mode TV dengan kontrol arah &amp; OK pada remote</span></li>
+        <li data-d="ph"><span class="tile"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg></span><div><b>HP</b><span>Tombol besar dan menu bawah, nyaman satu tangan</span></div></li>
+        <li data-d="tab"><span class="tile"><svg class="ic" aria-hidden="true"><use href="#i-tablet"/></svg></span><div><b>Tablet</b><span>Layar lega untuk main berdua</span></div></li>
+        <li data-d="pc"><span class="tile"><svg class="ic" aria-hidden="true"><use href="#i-laptop"/></svg></span><div><b>Laptop / PC</b><span>Semua game terlihat sekaligus</span></div></li>
+        <li data-d="tv"><span class="tile"><svg class="ic" aria-hidden="true"><use href="#i-tv"/></svg></span><div><b>Smart TV</b><span>Mode TV dengan tombol arah dan OK di remote</span></div></li>
       </ul>
       <button class="btn ghost tvbtn" type="button" id="tvtoggle">Coba Mode TV</button>
     </div>
-    <div class="stage" aria-hidden="true">
-      <div class="d d-tv"><img src="assets/hero-family-play.webp" alt="" width="1672" height="941" loading="lazy"></div>
-      <div class="d d-lap"><img src="assets/game-world.webp" alt="" width="1280" height="720" loading="lazy"></div>
-      <div class="d d-tab"><img src="assets/ular-tangga.webp" alt="" width="720" height="480" loading="lazy"></div>
-      <div class="d d-ph"><img src="assets/monopoli.webp" alt="" width="720" height="480" loading="lazy"></div>
+    <div class="stage rv" id="stage" aria-hidden="true">
+      <figure class="d d-tv" data-d="tv"><div class="bz"><div class="scr"><img class="sk-d" src="assets/scr-tv-dark.webp" alt="" width="960" height="540" loading="lazy"><img class="sk-l" src="assets/scr-tv-light.webp" alt="" width="960" height="540" loading="lazy"></div></div><i class="stand"></i><figcaption class="lb">Smart TV</figcaption></figure>
+      <figure class="d d-pc" data-d="pc"><div class="bz"><div class="scr"><img class="sk-d" src="assets/scr-pc-dark.webp" alt="" width="960" height="600" loading="lazy"><img class="sk-l" src="assets/scr-pc-light.webp" alt="" width="960" height="600" loading="lazy"></div></div><i class="base"></i><figcaption class="lb">Laptop / PC</figcaption></figure>
+      <figure class="d d-tab" data-d="tab"><div class="bz"><div class="scr"><img class="sk-d" src="assets/scr-tab-dark.webp" alt="" width="800" height="600" loading="lazy"><img class="sk-l" src="assets/scr-tab-light.webp" alt="" width="800" height="600" loading="lazy"></div></div><figcaption class="lb">Tablet</figcaption></figure>
+      <figure class="d d-ph" data-d="ph"><div class="bz"><div class="scr"><img class="sk-d" src="assets/scr-ph-dark.webp" alt="" width="300" height="650" loading="lazy"><img class="sk-l" src="assets/scr-ph-light.webp" alt="" width="300" height="650" loading="lazy"></div></div><figcaption class="lb">HP</figcaption></figure>
     </div>
   </div>
 </section>
 
 <!-- SEGERA -->
 <section class="sec" id="segera">
-  <div class="head center"><p class="eyebrow">Sedang disiapkan</p><h2>Bermain Sambil Belajar</h2></div>
+  <div class="head rv"><h2>Segera: bermain sambil belajar</h2><p class="sub">Tiga fitur yang sedang disiapkan.</p></div>
   <div class="feats">
-    <article class="feat" style="--c:#2563EB"><img src="assets/learning.svg" alt="" width="64" height="64" loading="lazy"><span class="soon-tag">Segera Hadir</span><h3>Belajar Seru</h3><p>Matematika, bahasa, dan logika dalam bentuk permainan.</p><button class="btn sm" data-modal="Belajar Seru">Segera Hadir</button></article>
-    <article class="feat" style="--c:#C026D3"><img src="assets/story.svg" alt="" width="64" height="64" loading="lazy"><span class="soon-tag">Segera Hadir</span><h3>Cerita Interaktif</h3><p>Dongeng petualangan, keluarga memilih jalan ceritanya.</p><button class="btn sm" data-modal="Cerita Interaktif">Segera Hadir</button></article>
-    <article class="feat" style="--c:#CA8A04"><img src="assets/trophy.svg" alt="" width="64" height="64" loading="lazy"><span class="soon-tag">Segera Hadir</span><h3>Album Pencapaian</h3><p>Koleksi bintang, level, dan hadiah dari setiap permainan.</p><button class="btn sm" data-modal="Album Pencapaian">Segera Hadir</button></article>
+    <button class="feat rv" type="button" style="--c1:#59A8FF;--c2:#2563EB" data-modal="Belajar Seru"><span class="tile"><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg></span><span><b>Belajar Seru</b><small>Matematika, bahasa, dan logika dalam bentuk permainan.</small></span></button>
+    <button class="feat rv" type="button" style="--c1:#EE8CFF;--c2:#C026D3" data-modal="Cerita Interaktif"><span class="tile"><svg class="ic" aria-hidden="true"><use href="#i-video"/></svg></span><span><b>Cerita Interaktif</b><small>Dongeng petualangan, keluarga memilih jalan ceritanya.</small></span></button>
+    <button class="feat rv" type="button" style="--c1:#FFE066;--c2:#F5A300" data-modal="Album Pencapaian"><span class="tile"><svg class="ic" aria-hidden="true"><use href="#i-trophy"/></svg></span><span><b>Album Pencapaian</b><small>Koleksi bintang, level, dan hadiah dari setiap permainan.</small></span></button>
   </div>
 </section>
 
 <!-- FAQ -->
 <section class="sec narrow" id="faq">
-  <div class="head center"><p class="eyebrow">Tanya jawab</p><h2>Pertanyaan yang sering muncul</h2></div>
+  <div class="head rv"><h2>Pertanyaan yang sering muncul</h2></div>
   <div class="faq">
-    <details><summary>Apakah harus instal aplikasi?</summary><p>Tidak. Dino Family Play berjalan langsung di browser, jadi cukup buka alamat website di perangkat apa pun.</p></details>
-    <details><summary>Berapa pemain yang dibutuhkan?</summary><p>Minimal 2 pemain. Sebagian besar game bisa dimainkan 2–4 pemain, dan game adu otak sampai 6 pemain.</p></details>
-    <details><summary>Bisa dimainkan di TV?</summary><p>Bisa. Di Smart TV, tampilan otomatis berubah ke Mode TV dengan menu samping dan kontrol memakai tombol arah, OK, dan Back pada remote. Di PC, tekan tombol “Coba Mode TV” untuk mencobanya.</p></details>
-    <details><summary>Kapan game lainnya hadir?</summary><p>Ular Tangga dan Monopoli sudah siap dimainkan. Game lain sedang disiapkan satu per satu — cek kembali secara berkala.</p></details>
+    <details class="rv"><summary>Apakah harus instal aplikasi?</summary><p>Tidak. Dino Family Play berjalan langsung di browser, jadi cukup buka alamat website di perangkat apa pun.</p></details>
+    <details class="rv"><summary>Berapa pemain yang dibutuhkan?</summary><p>Minimal 2 pemain. Ular Tangga dan Monopoli bisa dimainkan 2–4 pemain, dan Monopoli juga punya mode melawan komputer.</p></details>
+    <details class="rv"><summary>Bisa dimainkan di TV?</summary><p>Bisa. Di Smart TV, tampilan otomatis berubah ke Mode TV dengan menu samping dan kontrol memakai tombol arah, OK, dan Back pada remote. Di PC, tekan tombol “Coba Mode TV” untuk mencobanya.</p></details>
+    <details class="rv"><summary>Kapan game lainnya hadir?</summary><p>Ular Tangga dan Monopoli sudah siap dimainkan. Game lain sedang disiapkan satu per satu — cek kembali secara berkala.</p></details>
   </div>
 </section>
 
 <!-- DUKUNGAN -->
 <section class="sec" id="dukung">
-  <div class="donate">
-    <div class="dn-art" aria-hidden="true"><img src="assets/dino-blue.png" alt="" width="395" height="520" loading="lazy"><img class="dn-heart" src="assets/heart.svg" alt="" width="64" height="64" loading="lazy"><img src="assets/dino-pink.png" alt="" width="395" height="520" loading="lazy"></div>
+  <div class="donate rv">
+    <div class="dn-art" aria-hidden="true"><img src="assets/dino-blue.webp" alt="" width="319" height="420" loading="lazy"><svg class="dn-heart" viewBox="0 0 24 24"><use href="#i-heart"/></svg><img src="assets/dino-pink.webp" alt="" width="319" height="420" loading="lazy"></div>
     <div class="dn-body">
-      <p class="eyebrow dn-eye">Dukung kami</p>
-      <h2>Bantu Dino Family Play Terus Tumbuh</h2>
+      <h2>Bantu Dino Family Play terus tumbuh</h2>
       <p class="dn-quote">Satu kebaikan kecil bisa menghadirkan lebih banyak tawa di meja keluarga.</p>
       <p class="dn-p">Dino Family Play dibuat agar keluarga Indonesia punya cara sederhana untuk bermain, belajar, dan berkumpul tanpa harus membayar atau memasang aplikasi apa pun. Di balik setiap game ada waktu untuk merancang, menggambar, menguji, dan merawat. Dukungan Anda membuat semua itu bisa terus berjalan.</p>
       <ul class="dn-list">
-        <li><img src="assets/game-board.svg" alt="" width="40" height="40" loading="lazy"><span><b>Game baru untuk keluarga</b><small>Ludo, memori, kuis, dan petualangan lainnya.</small></span></li>
-        <li><img src="assets/palette.svg" alt="" width="40" height="40" loading="lazy"><span><b>Ilustrasi dan cerita</b><small>Karakter dan dunia Dino yang makin hidup.</small></span></li>
-        <li><img src="assets/music.svg" alt="" width="40" height="40" loading="lazy"><span><b>Musik dan suara</b><small>Pengalaman bermain yang lebih menyenangkan.</small></span></li>
-        <li><img src="assets/wrench.svg" alt="" width="40" height="40" loading="lazy"><span><b>Perawatan website</b><small>Perbaikan, pembaruan, dan biaya operasional.</small></span></li>
+        <li><span class="tile" style="--c1:#9B7BFF;--c2:#5B2EE6"><svg class="ic" aria-hidden="true"><use href="#i-board"/></svg></span><span><b>Game baru untuk keluarga</b><small>Ludo, memori, kuis, dan petualangan lainnya.</small></span></li>
+        <li><span class="tile" style="--c1:#FF7FB0;--c2:#E6307F"><svg class="ic" aria-hidden="true"><use href="#i-palette"/></svg></span><span><b>Ilustrasi dan cerita</b><small>Karakter dan dunia Dino yang makin hidup.</small></span></li>
+        <li><span class="tile" style="--c1:#59A8FF;--c2:#2563EB"><svg class="ic" aria-hidden="true"><use href="#i-music"/></svg></span><span><b>Musik dan suara</b><small>Pengalaman bermain yang lebih menyenangkan.</small></span></li>
+        <li><span class="tile" style="--c1:#FFB84A;--c2:#F26A10"><svg class="ic" aria-hidden="true"><use href="#i-wrench"/></svg></span><span><b>Perawatan website</b><small>Perbaikan, pembaruan, dan biaya operasional.</small></span></li>
       </ul>
       <div class="dn-cta">
-        <button class="btn big dn-btn" type="button" data-donate><img src="assets/heart.svg" alt="" width="28" height="28">Dukung Sekarang</button>
+        <button class="btn big dn-btn" type="button" data-donate><svg class="ic" aria-hidden="true"><use href="#i-heart"/></svg>Dukung sekarang</button>
         <p class="dn-note">Sukarela dan sesuai keikhlasan. Berapa pun sangat berarti.<br>Semua game tetap gratis untuk dimainkan.</p>
       </div>
     </div>
@@ -236,10 +255,10 @@
 
 <!-- CTA AKHIR -->
 <section class="final">
-  <div class="final-in">
-    <img class="fd1" src="assets/dino-blue.png" alt="" width="395" height="520" loading="lazy">
-    <div><h2>Siap main bareng keluarga?</h2><p>Pilih game, panggil semua orang, dan mulai malam seru kalian.</p><a class="btn big" href="#game"><img src="assets/button-play.svg" alt="" width="28" height="28">Mulai Bermain</a></div>
-    <img class="fd2" src="assets/dino-red.png" alt="" width="492" height="520" loading="lazy">
+  <div class="final-in rv">
+    <img class="fd1" src="assets/dino-blue.webp" alt="" width="319" height="420" loading="lazy">
+    <div><h2>Siap main bareng keluarga?</h2><p>Pilih game, panggil semua orang, dan mulai malam seru kalian.</p><a class="btn big" href="#game"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Mulai bermain</a></div>
+    <img class="fd2" src="assets/dino-red.webp" alt="" width="397" height="420" loading="lazy">
   </div>
 </section>
 </main>
@@ -247,26 +266,26 @@
 <footer class="foot">
   <img src="assets/logo.png" alt="Dino Family Play" class="flogo" width="900" height="300" loading="lazy">
   <p>Kumpulan game keluarga yang seru dan edukatif untuk dimainkan bersama di rumah.</p>
-  <nav aria-label="Footer"><a href="#beranda">Beranda</a><a href="#game">Semua Game</a><a href="#misi">Misi Keluarga</a><a href="#perangkat">Perangkat</a><a href="#faq">Tanya Jawab</a><a href="#dukung">Dukung</a></nav>
+  <nav aria-label="Footer"><a href="#beranda">Beranda</a><a href="#game">Game</a><a href="#misi">Misi</a><a href="#perangkat">Perangkat</a><a href="#faq">Tanya Jawab</a><a href="#dukung">Dukung</a></nav>
   <p class="credit">Dikembangkan oleh tim <a href="https://benyoriki.com" target="_blank" rel="noopener">benyoriki.com</a></p>
   <small>BelajarBermain2.online · © 2026 Dino Family Play</small>
 </footer>
 
 <nav class="tabbar" aria-label="Menu cepat">
-  <a href="#beranda" class="on"><img src="assets/home.svg" alt="" width="26" height="26">Beranda</a>
-  <a href="#game"><img src="assets/game-board.svg" alt="" width="26" height="26">Game</a>
-  <a href="#misi"><img src="assets/star.svg" alt="" width="26" height="26">Misi</a>
-  <a href="#segera"><img src="assets/learning.svg" alt="" width="26" height="26">Belajar</a>
-  <a href="#" data-profile><img class="pf-av" src="assets/dino-blue.png" alt="" width="26" height="26">Profil</a>
+  <a href="#beranda" class="on"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg>Beranda</a>
+  <a href="#game"><svg class="ic" aria-hidden="true"><use href="#i-pad"/></svg>Game</a>
+  <a href="#misi"><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg>Misi</a>
+  <a href="#segera"><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg>Belajar</a>
+  <a href="#" data-profile><img class="pf-av" src="assets/dino-blue.webp" alt="" width="26" height="26">Profil</a>
 </nav>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mt" hidden>
-  <div class="box"><img src="assets/dino-pterodactyl.png" alt="" width="110" height="108"><h3 id="mt"></h3><p id="mp">Fitur ini sedang disiapkan. Nantikan di pembaruan berikutnya!</p><button class="btn" id="mx">Oke, Mengerti</button></div>
+  <div class="box"><img src="assets/dino-pterodactyl.webp" alt="" width="300" height="295"><h3 id="mt"></h3><p id="mp">Fitur ini sedang disiapkan. Nantikan di pembaruan berikutnya!</p><button class="btn" id="mx">Oke, Mengerti</button></div>
 </div>
 
 <div class="dlg" id="profile" role="dialog" aria-modal="true" aria-labelledby="pf-t" hidden>
   <div class="sheet pf" tabindex="-1">
-    <button class="sh-x pf-x" type="button" id="pf-x" aria-label="Tutup"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <button class="sh-x pf-x" type="button" id="pf-x" aria-label="Tutup"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
     <div class="sh-body pf-body">
 
       <header class="pf-hero">
@@ -274,7 +293,7 @@
         <p class="pf-eyebrow">Kartu Pemain</p>
         <div class="pf-stage">
           <div class="pf-orbit" aria-hidden="true"><i style="--r:0deg"></i><i style="--r:120deg"></i><i style="--r:240deg"></i></div>
-          <div class="pf-ring" id="pf-ring" style="--p:0"><div class="pf-disc"><img id="pf-big" src="assets/dino-blue.png" alt="" width="395" height="520"></div></div>
+          <div class="pf-ring" id="pf-ring" style="--p:0"><div class="pf-disc"><img id="pf-big" src="assets/dino-blue.webp" alt="" width="319" height="420"></div></div>
           <span class="pf-lvbadge" id="pf-lvn">1</span>
         </div>
         <h3 id="pf-t">Pemain Dino</h3>
@@ -287,11 +306,11 @@
       </header>
 
       <section class="pf-bento" aria-label="Statistik">
-        <div class="t-big"><img src="assets/star.svg" alt="" width="56" height="56"><b id="st-total">0</b><span>Total bintang</span></div>
-        <div><span class="ti"><img src="assets/mission.svg" alt="" width="28" height="28"></span><b id="st-today">0/6</b><span>Bintang hari ini</span></div>
-        <div><span class="ti"><img src="assets/game-board.svg" alt="" width="28" height="28"></span><b id="st-plays">0</b><span>Game dimainkan</span></div>
+        <div class="t-big"><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg><b id="st-total">0</b><span>Total bintang</span></div>
+        <div><span class="ti" style="--c1:#FFB84A;--c2:#F26A10"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg></span><b id="st-today">0/6</b><span>Bintang hari ini</span></div>
+        <div><span class="ti" style="--c1:#9B7BFF;--c2:#5B2EE6"><svg class="ic" aria-hidden="true"><use href="#i-board"/></svg></span><b id="st-plays">0</b><span>Game dimainkan</span></div>
         <div class="t-week">
-          <div class="wk-h"><span><img src="assets/bolt.svg" alt="" width="22" height="22"><b id="st-streak">0</b> hari beruntun</span><small>7 hari terakhir</small></div>
+          <div class="wk-h"><span><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg><b id="st-streak">0</b> hari beruntun</span><small>7 hari terakhir</small></div>
           <ol class="wk" id="pf-week"></ol>
         </div>
       </section>
@@ -304,12 +323,12 @@
       <section class="pf-sec">
         <h4>Pilih karakter</h4>
         <div class="pf-avs" role="radiogroup" aria-label="Pilih karakter">
-          <button type="button" role="radio" data-av="dino-blue"><img src="assets/dino-blue.png" alt="" width="395" height="520"><span>Biru</span></button>
-          <button type="button" role="radio" data-av="dino-pink"><img src="assets/dino-pink.png" alt="" width="395" height="520"><span>Pink</span></button>
-          <button type="button" role="radio" data-av="dino-green"><img src="assets/dino-green.png" alt="" width="449" height="520"><span>Hijau</span></button>
-          <button type="button" role="radio" data-av="dino-red"><img src="assets/dino-red.png" alt="" width="492" height="520"><span>Merah</span></button>
-          <button type="button" role="radio" data-av="dino-yellow"><img src="assets/dino-yellow.png" alt="" width="404" height="520"><span>Kuning</span></button>
-          <button type="button" role="radio" data-av="dino-pterodactyl"><img src="assets/dino-pterodactyl.png" alt="" width="300" height="295"><span>Ptero</span></button>
+          <button type="button" role="radio" data-av="dino-blue"><img src="assets/dino-blue.webp" alt="" width="319" height="420"><span>Biru</span></button>
+          <button type="button" role="radio" data-av="dino-pink"><img src="assets/dino-pink.webp" alt="" width="319" height="420"><span>Pink</span></button>
+          <button type="button" role="radio" data-av="dino-green"><img src="assets/dino-green.webp" alt="" width="363" height="420"><span>Hijau</span></button>
+          <button type="button" role="radio" data-av="dino-red"><img src="assets/dino-red.webp" alt="" width="397" height="420"><span>Merah</span></button>
+          <button type="button" role="radio" data-av="dino-yellow"><img src="assets/dino-yellow.webp" alt="" width="326" height="420"><span>Kuning</span></button>
+          <button type="button" role="radio" data-av="dino-pterodactyl"><img src="assets/dino-pterodactyl.webp" alt="" width="300" height="295"><span>Ptero</span></button>
         </div>
       </section>
 
@@ -328,8 +347,8 @@
       </section>
     </div>
     <footer class="pf-dock">
-      <button class="btn ghost pf-share" type="button" id="pf-share" aria-label="Bagikan profil"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M8 8l4-4 4 4M5 13v5a2 2 0 002 2h10a2 2 0 002-2v-5"/></svg>Bagikan</button>
-      <a class="btn pf-cta" href="#misi" id="pf-go"><img src="assets/star.svg" alt="" width="24" height="24">Kumpulkan Bintang</a>
+      <button class="btn ghost pf-share" type="button" id="pf-share" aria-label="Bagikan profil"><svg class="ic" aria-hidden="true"><use href="#i-share"/></svg>Bagikan</button>
+      <a class="btn pf-cta" href="#misi" id="pf-go"><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg>Kumpulkan Bintang</a>
     </footer>
     <div class="toast" id="pf-toast" role="status" aria-live="polite"></div>
   </div>
@@ -338,26 +357,26 @@
 <div class="dlg" id="donate" role="dialog" aria-modal="true" aria-labelledby="dn-t" hidden>
   <div class="sheet" tabindex="-1">
     <header class="sh-head">
-      <span class="sh-ic"><img src="assets/heart.svg" alt="" width="40" height="40"></span>
+      <span class="sh-ic"><svg class="ic" aria-hidden="true"><use href="#i-heart"/></svg></span>
       <div><h3 id="dn-t">Donasi Sukarela</h3><p>Dukungan kecil, semangat besar untuk keluarga Indonesia.</p></div>
-      <button class="sh-x" type="button" id="dn-x" aria-label="Tutup"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <button class="sh-x" type="button" id="dn-x" aria-label="Tutup"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
     </header>
     <div class="sh-body">
       <p class="sh-lead"><b>Terima kasih sudah mampir.</b> Dino Family Play lahir dari keyakinan sederhana: waktu berkualitas bersama keluarga adalah hadiah terbaik. Jika portal ini pernah membuat rumah Anda lebih ramai oleh tawa, dukungan Anda akan membantu kami menghadirkan lebih banyak game, ilustrasi, dan pengalaman bermain yang aman dan ramah anak.</p>
       <div class="tabs" role="tablist" aria-label="Pilih cara donasi">
-        <button type="button" role="tab" id="tab-qris" aria-selected="true" aria-controls="pn-qris" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2v2h-2zM14 18h2v2h-2zM18 18h2v2h-2z"/></svg>QRIS</button>
-        <button type="button" role="tab" id="tab-bca" aria-selected="false" aria-controls="pn-bca" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-6 9 6M5 10v8M9.500 10v8M14.500 10v8M19 10v8M3 20h18"/></svg>Transfer BCA</button>
+        <button type="button" role="tab" id="tab-qris" aria-selected="true" aria-controls="pn-qris" class="on"><svg class="ic" aria-hidden="true"><use href="#i-qr"/></svg>QRIS</button>
+        <button type="button" role="tab" id="tab-bca" aria-selected="false" aria-controls="pn-bca" tabindex="-1"><svg class="ic" aria-hidden="true"><use href="#i-bank"/></svg>Transfer BCA</button>
       </div>
       <div class="panel" id="pn-qris" role="tabpanel" aria-labelledby="tab-qris">
         <figure class="qris"><img src="assets/qris.png" alt="Kode QRIS atas nama Riki Hermawan, Digital &amp; Kreatif" width="800" height="924" loading="lazy"></figure>
         <p class="qname">RIKI HERMAWAN, DIGITAL &amp; KREATIF</p>
         <p class="qid">NMID: ID1026615097429</p>
-        <a class="btn" href="assets/qris.png" download="QRIS-DinoFamilyPlay.png"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Unduh Kode QRIS</a>
+        <a class="btn" href="assets/qris.png" download="QRIS-DinoFamilyPlay.png"><svg class="ic" aria-hidden="true"><use href="#i-down"/></svg>Unduh Kode QRIS</a>
         <ol class="how"><li>Pindai QRIS di atas atau unduh gambarnya.</li><li>Buka e-wallet atau mobile banking (GoPay, OVO, DANA, ShopeePay, LinkAja, dll).</li><li>Pilih <b>Scan</b> (atau <b>Upload dari galeri</b>), isi nominal sesuai keikhlasan, lalu konfirmasi.</li></ol>
       </div>
       <div class="panel" id="pn-bca" role="tabpanel" aria-labelledby="tab-bca" hidden>
         <div class="bank"><span class="bk">Bank BCA</span><span class="bt">Transfer bank</span><small>Nomor rekening</small><b id="rek">683 089 6757</b><small>Atas nama</small><strong>Riki Hermawan</strong></div>
-        <button class="btn" type="button" id="copyrek"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 012-2h9"/></svg><span>Salin Nomor Rekening</span></button>
+        <button class="btn" type="button" id="copyrek"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Salin Nomor Rekening</span></button>
         <ol class="how"><li>Buka m-BCA, BCA mobile, ATM, atau aplikasi bank lain.</li><li>Pilih transfer, lalu masukkan nomor rekening di atas. Dari bank lain, gunakan kode bank <b>014</b>.</li><li>Pastikan nama penerima sesuai, isi nominal sesuai keikhlasan, lalu konfirmasi.</li></ol>
       </div>
       <p class="sh-alt"><b>Belum bisa berdonasi saat ini?</b> Tidak apa-apa. Bermain bersama anak, membagikan website ke keluarga dan teman, atau memberi saran juga dukungan yang sangat berarti.</p>

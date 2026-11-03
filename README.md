@@ -1,4 +1,4 @@
-# Dino Family Play — Homepage 2026 (Bright Fantasy UI)
+# Dino Family Play — Homepage 2026 (v13, tema "Malam di Hutan")
 HTML5 + CSS3 + JavaScript vanilla. Tanpa build, tanpa npm, siap GitHub Pages.
 
 ## Struktur
@@ -83,3 +83,17 @@ Perbaikan: menu hamburger HP (sebelumnya terpotong), garis kosong di atas header
 
 ## Update v11: Profil Pemain didesain ulang
 Kartu pemain gaya 2026: hero aurora yang warnanya mengikuti karakter pilihan, avatar dengan cincin progres dan lencana level, bar XP, bento statistik (total bintang, bintang hari ini, game dimainkan), strip aktivitas 7 hari, pilihan karakter berupa kartu, lencana dengan progres, tombol Bagikan (Web Share / salin teks), dan dock tombol tetap di bawah. Konfirmasi "Atur ulang profil" kini tampil di dalam desain (tidak lagi memakai dialog bawaan browser).
+
+
+## Catatan v13 (redesain + ringan)
+- Tampilan baru: tema malam hutan (indigo gelap, kartu kaca, aksen amber + violet), hero dengan tombol langsung ke Ular Tangga & Monopoli, kartu game besar untuk game yang siap dan kartu ringkas untuk yang segera hadir.
+- HP: tab bar bawah + menu ringkas. Tablet/PC: header kaca melayang. TV: menu samping, kartu horizontal, fokus remote besar.
+- Ringan: layar loading paksa 4,7 dtk dihapus; font Fredoka disimpan lokal (`assets/fredoka.woff2`), tanpa Google Fonts; gambar dino PNG → WebP; folder `assets/` 3,2 MB → 1,3 MB.
+- Nama file dino sekarang `.webp` (mis. `assets/dino-blue.webp`).
+
+## Update v14: tema terang & gelap, ikon baru, tampilan perangkat
+- Tombol matahari/bulan di header: tema terang ("Pagi di Hutan") dan gelap ("Malam di Hutan"). Pilihan tersimpan (`dfp-theme`); tanpa pilihan mengikuti pengaturan sistem.
+- Ikon: satu sprite SVG duotone inline di `index.html` (`#i-...`), dipakai lewat `<use>`; ikut warna tema. File SVG lama dihapus.
+- Hero baru: latar `hero-jungle.webp` + karakter Dino, tombol kategori warna-warni, bagian "Kenapa keluarga suka".
+- Gambar kartu: `ular-tangga.webp` (logo + latar hutan) dan `monopoli.webp` (logo Monopoli Dino).
+- Bagian "Satu portal, semua layar": bingkai HP/tablet/PC/TV berisi tangkapan layar asli situs (`assets/scr-*-dark|light.webp`). Ambil ulang jika tampilan hero berubah (viewport: HP 390×844, tablet 1024×768, PC 1440×900, TV 1920×1080 `?tv=1`).

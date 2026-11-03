@@ -16,29 +16,48 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 
 /* daftar game */
 const grid=$('#games');
+function card(g,i){
+ const play=!!g.href;
+ return `<article class="game${play?' ready':' soon'}" style="--i:${i}">
+ <div class="th"><img src="assets/${g.img}.webp" alt="${play?'Thumbnail '+esc(g.n):''}" ${play?'':'aria-hidden="true" '}loading="lazy" width="720" height="480"><span class="badge">${g.tag}</span><span class="status">${play?'<i></i>Siap main':'Segera'}</span></div>
+ <div class="bd"><h3>${esc(g.n)}</h3><small><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg>${g.pl}</small><p>${esc(g.d)}</p>
+ ${play?`<a class="go" data-play href="${g.href}"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Mainkan</a>`:''}</div></article>`;
+}
 function render(f='all'){
  const list=GAMES.filter(g=>f==='all'||(f==='ready'?g.href:g.cat===f)).sort((a,b)=>!!b.href-!!a.href);
- grid.innerHTML=list.map((g,i)=>`<article class="game${g.href?'':' soon'}" style="animation-delay:${i*60}ms">
- <div class="th"><img src="assets/${g.img}.webp" alt="Thumbnail ${esc(g.n)}" loading="lazy" width="720" height="480"><span class="badge">${g.tag}</span><span class="status">${g.href?'Siap main':'Segera'}</span></div>
- <div class="bd"><h3>${esc(g.n)}</h3><small>${g.pl}</small><p>${esc(g.d)}</p>
- ${g.href?`<a class="btn" href="${g.href}"><img src="assets/button-play.svg" alt="" width="22" height="22">Mainkan</a>`:`<button class="btn" data-modal="${esc(g.n)}">Segera Hadir</button>`}</div></article>`).join('');
+ grid.innerHTML=list.map(card).join('');
 }
 function setFilter(f){$$('.chip').forEach(x=>{const on=x.dataset.f===f;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});render(f)}
 render();
 $$('.chip').forEach(c=>c.onclick=()=>setFilter(c.dataset.f));
 $$('[data-filter]').forEach(a=>a.addEventListener('click',()=>setFilter(a.dataset.filter)));
 
-/* marquee + game unggulan (diambil dari daftar GAMES) */
-$('#marq').innerHTML=[0,1].map(()=>GAMES.map(g=>`<span>${esc(g.n)}</span>`).join('')).join('');
-if(GAMES[0].href)$('#spotlink').href=GAMES[0].href;
+/* tombol main di hero: ambil tautan dari daftar GAMES */
+$$('[data-g]').forEach(a=>{const g=GAMES[+a.dataset.g];if(g&&g.href)a.href=g.href});
+
+/* tema terang / gelap: pilihan tersimpan; tanpa pilihan mengikuti sistem */
+const html=document.documentElement,themeBtn=$('#theme'),metaTC=$('meta[name=theme-color]');
+function paintTheme(t){html.setAttribute('data-theme',t);if(metaTC)metaTC.content=t==='light'?'#F6F3FF':'#080C24';
+ themeBtn.setAttribute('aria-label',t==='light'?'Ganti ke tema gelap':'Ganti ke tema terang');themeBtn.setAttribute('aria-pressed',t==='light')}
+paintTheme(html.getAttribute('data-theme')||'dark');
+themeBtn.onclick=()=>{const t=html.getAttribute('data-theme')==='light'?'dark':'light';paintTheme(t);store.set('dfp-theme',t)};
+try{matchMedia('(prefers-color-scheme: light)').addEventListener('change',e=>{if(!store.get('dfp-theme'))paintTheme(e.matches?'light':'dark')})}catch(e){}
+
+/* muncul halus saat di-scroll */
+const rvs=$$('.rv');
+if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -6% 0px',threshold:.06});rvs.forEach(el=>io.observe(el))}
+else rvs.forEach(el=>el.classList.add('in'));
+
+/* daftar perangkat menyorot perangkat yang sesuai di panggung */
+const stage=$('#stage');
+$$('.dev-list li').forEach(li=>{const on=()=>{stage.dataset.hl=li.dataset.d},off=()=>{delete stage.dataset.hl};
+ li.addEventListener('mouseenter',on);li.addEventListener('mouseleave',off);
+ li.addEventListener('click',()=>{stage.dataset.hl===li.dataset.d?off():on()})});
 
 /* garis progres scroll */
 const spb=$('#sp');
 function prog(){const m=document.documentElement.scrollHeight-innerHeight;spb.style.transform='scaleX('+(m>0?Math.min(1,scrollY/m):0)+')'}
 addEventListener('scroll',()=>requestAnimationFrame(prog),{passive:true});prog();
-
-/* loading screen: dihapus dari DOM setelah animasi CSS 4 detik (+0,55 dtk fade) selesai */
-const boot=$('#boot');if(boot)setTimeout(()=>boot.remove(),matchMedia('(prefers-reduced-motion:reduce)').matches?1500:4700);
 
 /* modal */
 const modal=$('#modal');let last;
@@ -80,14 +99,6 @@ function spy(){
 }
 let tk;addEventListener('scroll',()=>{if(!tk){tk=requestAnimationFrame(()=>{tk=0;spy()})}},{passive:true});spy();
 
-/* animasi muncul saat scroll */
-const rvEls=$$('.sec .head,.stats li,.cat,.steps li,.mission,.dev,.spot,.feat,.faq details,.donate,.final-in');
-rvEls.forEach((el,i)=>{el.classList.add('rv');el.style.transitionDelay=(i%4)*70+'ms'});
-if('IntersectionObserver' in window){
- const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
- rvEls.forEach(el=>io.observe(el));
-}else rvEls.forEach(el=>el.classList.add('in'));
-
 /* profil pemain (tersimpan di perangkat) */
 const PK='dfp-profile',HK='dfp-hist',dkey=(d=new Date())=>d.toISOString().slice(0,10);
 const readJ=(k,d)=>{try{return Object.assign(d,JSON.parse(store.get(k)||'{}'))}catch(e){return d}};
@@ -102,16 +113,16 @@ const sum=()=>Object.values(hist).reduce((a,b)=>a+(+b||0),0);
 function streak(){let n=0;const d=new Date();if(!(hist[dkey(d)]>0))d.setUTCDate(d.getUTCDate()-1);
  while(hist[dkey(d)]>0){n++;d.setUTCDate(d.getUTCDate()-1)}return n}
 const BADGES=[
- {i:'star',n:'Bintang Pertama',d:'Kumpulkan 1 bintang',v:t=>t.total,m:1},
- {i:'game-board',n:'Pemain Baru',d:'Buka 1 game',v:t=>prof.plays,m:1},
- {i:'teamwork',n:'Tim Kompak',d:'Selesaikan semua misi dalam sehari',v:t=>t.best,m:6},
- {i:'bolt',n:'Rajin 3 Hari',d:'Main 3 hari beruntun',v:t=>t.streak,m:3},
- {i:'trophy',n:'Kolektor Bintang',d:'Kumpulkan 20 bintang',v:t=>t.total,m:20},
- {i:'palette',n:'Gaya Sendiri',d:'Isi nama pemain',v:t=>prof.name?1:0,m:1}];
+ {i:'star',c:['#FFE066','#F5A300'],n:'Bintang Pertama',d:'Kumpulkan 1 bintang',v:t=>t.total,m:1},
+ {i:'board',c:['#9B7BFF','#5B2EE6'],n:'Pemain Baru',d:'Buka 1 game',v:t=>prof.plays,m:1},
+ {i:'users',c:['#3EE0A8','#0FA36B'],n:'Tim Kompak',d:'Selesaikan semua misi dalam sehari',v:t=>t.best,m:6},
+ {i:'bolt',c:['#FFB84A','#F26A10'],n:'Rajin 3 Hari',d:'Main 3 hari beruntun',v:t=>t.streak,m:3},
+ {i:'trophy',c:['#59A8FF','#2563EB'],n:'Kolektor Bintang',d:'Kumpulkan 20 bintang',v:t=>t.total,m:20},
+ {i:'palette',c:['#FF7FB0','#E6307F'],n:'Gaya Sendiri',d:'Isi nama pemain',v:t=>prof.name?1:0,m:1}];
 function drawProfile(){
  const total=sum(),today=+hist[dkey()]||0,st=streak(),best=Math.max(0,...Object.values(hist).map(Number));
  const lvN=Math.floor(total/5)+1,rank=RANKS[Math.min(lvN,RANKS.length)-1],into=total%5;
- const name=prof.name||'Pemain Dino',src='assets/'+prof.av+'.png',c=AVC[prof.av];
+ const name=prof.name||'Pemain Dino',src='assets/'+prof.av+'.webp',c=AVC[prof.av];
  pf.style.setProperty('--a',c[0]);pf.style.setProperty('--a2',c[1]);
  $('#pf-t').textContent=name;$('#pf-rank').textContent=rank;$('#pf-lvn').textContent=lvN;
  $('#pf-ring').style.setProperty('--p',into/5*100);$('#pf-fill').style.width=into/5*100+'%';
@@ -126,7 +137,7 @@ function drawProfile(){
  $('#pf-week').innerHTML=wk.join('');
  const t={total,streak:st,best};let got=0;
  $('#pf-badges').innerHTML=BADGES.map(b=>{const v=Math.min(b.v(t),b.m),ok=v>=b.m;if(ok)got++;
-  return `<li class="${ok?'':'lock'}"><img src="assets/${b.i}.svg" alt=""><b>${b.n}</b><small>${ok?'Terbuka! 🎉':b.d+' · '+v+'/'+b.m}</small>${ok?'':`<span class="pg"><i style="width:${v/b.m*100}%"></i></span>`}</li>`}).join('');
+  return `<li class="${ok?'':'lock'}"><span class="tile" style="--c1:${b.c[0]};--c2:${b.c[1]}"><svg class="ic" aria-hidden="true"><use href="#i-${b.i}"/></svg></span><b>${b.n}</b><small>${ok?'Terbuka! 🎉':b.d+' · '+v+'/'+b.m}</small>${ok?'':`<span class="pg"><i style="width:${v/b.m*100}%"></i></span>`}</li>`}).join('');
  $('#bd-count').textContent=got+'/'+BADGES.length;
 }
 const saveP=()=>store.set(PK,JSON.stringify(prof));
@@ -150,8 +161,8 @@ $('#pf-share').onclick=async()=>{const total=sum(),lv=Math.floor(total/5)+1,txt=
 pf.addEventListener('keydown',e=>{if(e.key!=='Tab')return;const f=$$('button:not([disabled]),a[href],input',pf).filter(x=>x.offsetParent&&!x.closest('[hidden]'));if(!f.length)return;const a=f[0],z=f[f.length-1];
  if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}});
 /* hitung game yang dibuka */
-document.addEventListener('click',e=>{if(e.target.closest('.game a.btn,#spotlink')){prof.plays=(+prof.plays||0)+1;saveP()}},true);
-$$('.pf-av').forEach(i=>i.src='assets/'+prof.av+'.png');
+document.addEventListener('click',e=>{if(e.target.closest('a[data-play]')){prof.plays=(+prof.plays||0)+1;saveP()}},true);
+$$('.pf-av').forEach(i=>i.src='assets/'+prof.av+'.webp');
 
 /* misi keluarga (tersimpan per hari di perangkat) */
 const MK='dfp-missions',today=new Date().toISOString().slice(0,10);
@@ -179,7 +190,7 @@ tvbtn.onclick=()=>{setTV(!root.classList.contains('tv'),true);if(root.classList.
 if(init)addEventListener('load',()=>$('.btn.big').focus({preventScroll:true}));
 
 /* Buka game dari portal: bawa Mode TV (?tv=1) agar game langsung tampil dalam mode TV */
-document.addEventListener('click',e=>{const l=e.target.closest('.game a.btn,#spotlink');
+document.addEventListener('click',e=>{const l=e.target.closest('a[data-play]');
  if(l&&root.classList.contains('tv')&&!/[?&]tv=1/.test(l.getAttribute('href')||'')&&!(l.getAttribute('href')||'').startsWith('#')){e.preventDefault();location.href=l.getAttribute('href')+'?tv=1'}});
 
 /* D-pad: panah memindahkan fokus ke elemen terdekat; OK = Enter; Back = tutup modal / ke atas */
