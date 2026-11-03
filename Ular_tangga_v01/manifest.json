@@ -1,0 +1,19 @@
+{
+  "id": "./",
+  "name": "Ular Tangga Dino — Dino Family Play",
+  "short_name": "Ular Tangga Dino",
+  "description": "Game ular tangga keluarga untuk 1–4 pemain, bisa offline.",
+  "lang": "id",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "any",
+  "background_color": "#0A1240",
+  "theme_color": "#0A1240",
+  "icons": [
+    { "src": "assets/images/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/images/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/images/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,100 @@
+/* Layout per perangkat. Papan diukur JS (Board.fit + ResizeObserver) dari ruang kosong di #boardSlot. */
+
+/* ===== Default: laptop & desktop (landscape lebar) ===== */
+#game.active{grid-template-columns:minmax(14rem,21%) minmax(0,1fr) minmax(15rem,23%);grid-template-rows:auto minmax(0,1fr);grid-template-areas:"top top top" "players board control"}
+#game .g-players,#game .g-control{align-self:center;max-height:100%}
+.logo-wrap{width:min(26rem,84%,calc((100vh - 24rem) * 1.36))}
+.features{max-width:46rem}.features span,.features .x{display:inline}.features li{font-size:.85rem}
+#menu.active{padding-bottom:.6rem}
+.mascot{height:min(46vh,24rem)}
+.m-left{left:3%}.m-right{right:3%}
+
+/* ===== Laptop kecil (1366×768) ===== */
+@media (max-height:800px) and (min-width:1000px){
+  html{font-size:15px}.g-logo{height:2.8rem}.dice{width:4rem;height:4rem}.log{display:none}
+  .mascot{height:min(42vh,20rem)}
+}
+/* ===== Desktop besar ===== */
+@media (min-width:1700px) and (min-height:900px){html{font-size:19px}}
+
+/* ===== Tablet ===== */
+@media (max-width:1024px) and (min-width:600px){
+  html{font-size:16px}
+  .mascot{height:min(22vh,14rem)}#menu.active{padding-bottom:calc(min(22vh,14rem) + .4rem)}
+  .logo-wrap{width:min(24rem,76%,calc((100vh - 32rem) * 1.36))}
+}
+@media (max-width:1024px) and (min-width:700px) and (orientation:landscape){
+  #game.active{grid-template-columns:minmax(0,1fr) 18rem;grid-template-rows:auto auto minmax(0,1fr);grid-template-areas:"top top" "board players" "board control"}
+  #game .g-players{align-self:start}#game .g-control{align-self:stretch}.log{display:none}
+  .mascot{display:none}#menu.active{padding-bottom:.6rem}.logo-wrap{width:min(26rem,64%,calc((100vh - 17rem) * 1.36))}
+}
+@media (max-width:900px) and (min-width:600px) and (orientation:portrait){
+  #game.active{grid-template-columns:1fr;grid-template-rows:auto auto minmax(0,1fr) auto;grid-template-areas:"top" "players" "board" "control"}
+  #playerList{flex-direction:row;flex-wrap:wrap}#playerList li{flex:1 1 9rem}
+  .g-players h3{display:none}.g-players{padding:.5rem}
+  .g-control{flex-direction:row;align-items:center;flex-wrap:wrap;justify-content:center}.turn{flex:1 1 100%}
+  .g-control .btn.xl{width:auto;flex:1 1 12rem}.log{display:none}
+}
+
+/* ===== Smartphone portrait (360–430) ===== */
+@media (max-width:599px){
+  html{font-size:14px}
+  .features span,.features .x{display:none}.features li{font-size:.72rem;padding:.25rem .6rem}.features{max-width:100%}
+  .logo-wrap{width:min(100%,17rem)}
+  .menu-btns{gap:.7rem}.btn.xl{font-size:1.25rem;min-height:3.3rem}
+  #menu.active{padding-bottom:calc(var(--mh) * .7 + .4rem);gap:.7rem}.mascot{height:min(var(--mh),19vh)}
+  .sheet{padding:.8rem .7rem}h2{font-size:1.4rem}
+  .ptabs{display:flex}.pcard{display:none}.pcard.cur{display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.6rem}
+  .pcards{grid-template-columns:1fr;margin-top:.2rem}
+  .pc-prev{width:100%}.pc-prev:before{width:9.5rem;height:9.5rem}.pc-av{height:9.2rem}.tag{font-size:.65rem}
+  .pc-body{width:100%}.pc-name{min-height:2.7rem;margin:.3rem 0}
+  .pc-chars{justify-content:center;flex-wrap:nowrap}.chbtn{width:3.1rem;height:3.4rem}
+  .mode{min-width:0;flex:1;padding:.3rem .2rem}
+  .actions{margin:.8rem -.7rem -.8rem;padding:.7rem .7rem .8rem}.actions .btn{padding:.5rem .6rem}.actions .btn:first-child{flex:0 0 32%}.actions .btn:last-child{flex:1;font-size:1rem}
+  .g-logo{height:2.2rem}.ibtn{width:2.5rem;height:2.5rem}.g-tools{gap:.35rem}
+  #game.active{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr) auto;grid-template-areas:"top" "players" "board" "control";gap:.4rem}
+  .g-players{padding:.35rem}.g-players h3{display:none}
+  #playerList{flex-direction:row;flex-wrap:wrap;gap:.3rem}
+  #playerList li{flex:1 1 44%;padding:.15rem .4rem;gap:.3rem}#playerList img{height:1.8rem;width:1.5rem}
+  #playerList .pn{font-size:.8rem}#playerList .pp{font-size:.68rem}#playerList .pcb{display:none}
+  .g-control{padding:.5rem;gap:.4rem;flex-direction:row;flex-wrap:wrap;align-items:center}
+  .turn{flex:1 1 100%;font-size:1rem;padding:.35rem}
+  .dice-box{flex:0 0 auto}.dice{width:3.6rem;height:3.6rem;padding:.4rem}
+  .g-control .btn.xl{width:auto;flex:1 1 9rem;font-size:1.15rem;min-height:3.4rem;padding:.4rem 1rem}
+  #rollBtn img{width:2rem;height:2rem}.log{display:none}.dice-txt{font-size:.8rem}
+}
+/* HP sangat sempit (≤ 359) */
+@media (max-width:359px){html{font-size:13px}.chbtn{width:2.2rem}}
+
+/* ===== Smartphone landscape ===== */
+@media (max-height:520px) and (orientation:landscape){
+  html{font-size:13px}
+  #menu.active{flex-direction:row;flex-wrap:wrap;gap:.8rem;padding-top:4.2rem;padding-bottom:.4rem}
+  .features,.mascot{display:none}
+  .hero{flex-direction:row;gap:1rem}.logo-wrap{width:min(44vw,18rem,calc((100vh - 4rem) * 1.36))}.menu-btns{width:min(40vw,18rem)}
+  .btn.xl{min-height:2.8rem;font-size:1.15rem}
+  .sheet{padding:.6rem}.rules{margin:.2rem auto}.sheet h2{font-size:1.2rem;margin-bottom:.2rem}#modeHint{display:none}
+  .ptabs{display:flex;margin:.2rem 0}.pcard{display:none}.pcard.cur{display:flex;flex-direction:row;align-items:center;gap:.8rem}.pcards{grid-template-columns:1fr}
+  .pc-prev{width:7rem}.pc-prev:before{width:6.5rem;height:6.5rem}.pc-av{height:6.2rem}.pc-chars{flex-wrap:nowrap}
+  #game.active{grid-template-columns:minmax(0,1fr) 15rem;grid-template-rows:auto minmax(0,1fr) auto;grid-template-areas:"board top" "board players" "board control";gap:.4rem}
+  .g-top{justify-content:flex-end;background:none;border:0;box-shadow:none;padding:0;min-height:0}.g-logo{display:none}
+  .g-tools{flex-wrap:wrap;justify-content:flex-end}.ibtn{width:2.3rem;height:2.3rem}
+  .g-players{padding:.35rem}.g-players h3{display:none}
+  #playerList{gap:.25rem}#playerList .pp{font-size:.62rem}#playerList .pn{font-size:.8rem}#playerList li{padding:.1rem .4rem}#playerList img{height:1.7rem;width:1.4rem}
+  .g-control{padding:.4rem;gap:.35rem;flex-direction:column}.turn{font-size:.85rem;padding:.3rem}
+  .dice{width:3rem;height:3rem;padding:.3rem}.g-control .btn.xl{min-height:3.4rem;font-size:1.05rem;padding:.3rem .8rem}
+  .log,.btn img,.dice-txt #posInfo{display:none}
+}
+
+/* ===== Mode Smart TV: tulisan & tombol besar, area aman ===== */
+.tv{font-size:calc(min(100vw / 72,100vh / 40))}
+.tv .screen{padding:5vh 5vw}
+.tv #game.active{padding:3.5vh 4vw}
+.tv .btn{min-height:3.6rem;font-size:1.15rem}.tv .btn.xl{min-height:4.2rem;font-size:1.6rem}
+.tv .ibtn{width:3.4rem;height:3.4rem}
+.tv .g-players,.tv .g-control{align-self:center}
+.tv .chbtn{width:3.4rem;height:3.8rem}
+.tv .hint{font-size:1rem}.tv .features li{font-size:1rem}
+.tv .log{display:none}
+.tv .m-top{padding-block:.5rem}.tv .bk-tx{font-size:1.2rem}.tv .bk-logo{display:block;height:2.6rem}
+.tv .logo-wrap{width:min(28rem,84%,calc((100vh - 26rem) * 1.36))}

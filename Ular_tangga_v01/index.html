@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ular Tangga Dino — Dino Family Play</title>
+<meta name="description" content="Ular Tangga Dino: game keluarga 1–4 pemain, bisa offline.">
+<meta name="theme-color" content="#0A1240">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/images/icon-192.png">
+<link rel="apple-touch-icon" href="assets/images/icon-192.png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="responsive.css">
+</head>
+<body data-screen="menu">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="3.1 3.1"/><path fill-rule="evenodd" d="M12 5.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zm0 4a2.5 2.5 0 110 5 2.5 2.5 0 010-5z"/></symbol>
+<symbol id="i-music" viewBox="0 0 24 24"><path d="M9 3v11.2a3.6 3.6 0 102 3.3V8h6V3z"/></symbol>
+<symbol id="i-sound" viewBox="0 0 24 24"><path d="M3 9v6h4l5 4V5L7 9z"/><path d="M15 9a4 4 0 010 6M17.5 6.5a8 8 0 010 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-full" viewBox="0 0 24 24"><path d="M4 4h6v2H6v4H4zM14 4h6v6h-2V6h-4zM4 14h2v4h4v2H4zM18 14h2v6h-6v-2h4z"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></symbol>
+<symbol id="i-exit" viewBox="0 0 24 24"><path d="M10 4H4v16h6v-2H6V6h4zM14 8l-1.4 1.4 2.6 2.6H8v2h7.2l-2.6 2.6L14 18l5-5z"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7 1.6-1.6L11.2 12l5.4-5.4z"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z"/></symbol>
+</svg>
+
+<div id="bg" aria-hidden="true"></div>
+<div id="offline" hidden>Kamu sedang offline. Game tetap bisa dimainkan.</div>
+
+<main id="app">
+
+<!-- ============ MENU ============ -->
+<section id="menu" class="screen active" data-back="portal">
+  <header class="m-top">
+    <div class="m-left">
+    <a class="portal-link back-btn" href="../index.html#game" aria-label="Kembali ke layar utama Dino Family Play" title="Kembali ke layar utama"><span class="bk-ic"><svg class="ic"><use href="#i-back"/></svg></span><span class="bk-tx">Kembali</span></a>
+    <img class="bk-logo" src="assets/images/dfp-logo.png" alt="" width="480" height="160">
+    </div>
+    <div class="m-tools">
+      <button class="ibtn" data-act="music" aria-label="Musik" aria-pressed="true"><svg><use href="#i-music"/></svg></button>
+      <button class="ibtn" data-act="sfx" aria-label="Efek suara" aria-pressed="true"><svg><use href="#i-sound"/></svg></button>
+      <button class="ibtn fs-only" data-act="fullscreen" aria-label="Layar penuh"><svg><use href="#i-full"/></svg></button>
+    </div>
+  </header>
+  <div class="hero">
+    <div class="logo-wrap"><img class="logo" src="assets/images/logo_dino_transparan.webp" alt="Ular Tangga Dino — Bermain, Belajar, Bersama Keluarga" width="900" height="660"></div>
+    <div class="menu-btns">
+      <button class="btn c-orange xl pulse" data-act="start" data-autofocus><svg class="ic"><use href="#i-play"/></svg>Mulai Bermain</button>
+      <div class="menu-row">
+        <button class="btn c-green" data-act="howto">Cara Bermain</button>
+        <button class="btn c-blue" data-act="settings"><svg class="ic"><use href="#i-gear"/></svg>Pengaturan</button>
+        <button class="btn c-pink" data-act="scores">Skor</button>
+        <button class="btn c-cyan" data-act="about">Tentang</button>
+      </div>
+    </div>
+  </div>
+  <ul class="features" aria-label="Fitur game">
+    <li><b>1–4 Pemain</b><span>Satu sampai empat</span></li>
+    <li><b>Keluarga</b><span>Ayah &amp; Bunda ikut main</span></li>
+    <li><b>Dadu seru</b><span>Animasi dadu</span></li>
+    <li><b>Tangga &amp; Ular</b><span>Naik dan meluncur</span></li>
+    <li class="x"><b>Musik</b><span>&amp; efek suara</span></li>
+    <li class="x"><b>Layar penuh</b><span>Cocok untuk TV</span></li>
+    <li class="x"><b>Offline</b><span>Setelah pertama dibuka</span></li>
+  </ul>
+  <div class="mascot m-left"><img src="assets/images/bidak_dino_biru.png" alt="" width="300" height="380"></div>
+  <div class="mascot m-right"><img src="assets/images/bidak_dino_merah_triceratops.png" alt="" width="300" height="300"></div>
+  <span class="ver">v3.0</span>
+</section>
+
+<!-- ============ PEMILIHAN PEMAIN ============ -->
+<section id="setup" class="screen" data-back="menu">
+  <div class="sheet panel">
+    <h2>Pilih Pemain</h2>
+    <div class="modes" id="modes" role="group" aria-label="Jumlah pemain"></div>
+    <p class="hint" id="modeHint"></p>
+    <div class="ptabs" id="ptabs" role="tablist" aria-label="Pilih pemain"></div>
+    <div class="pcards" id="pcards"></div>
+    <p id="setupErr" class="err" role="alert" hidden></p>
+    <div class="actions">
+      <button class="btn c-blue" data-act="menu">Kembali</button>
+      <button class="btn c-orange lg" data-act="begin"><svg class="ic"><use href="#i-play"/></svg>Mulai Permainan</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PERMAINAN ============ -->
+<section id="game" class="screen" data-back="pause">
+  <header class="g-top">
+    <img class="g-logo" src="assets/images/logo_dino_transparan.webp" alt="Ular Tangga Dino" width="900" height="660">
+    <div class="g-tools">
+      <button class="ibtn" data-act="music" aria-label="Musik" aria-pressed="true"><svg><use href="#i-music"/></svg></button>
+      <button class="ibtn" data-act="sfx" aria-label="Efek suara" aria-pressed="true"><svg><use href="#i-sound"/></svg></button>
+      <button class="ibtn" data-act="settings" aria-label="Pengaturan"><svg><use href="#i-gear"/></svg></button>
+      <button class="ibtn fs-only" data-act="fullscreen" aria-label="Layar penuh"><svg><use href="#i-full"/></svg></button>
+      <button class="ibtn" data-act="pause" aria-label="Jeda"><svg><use href="#i-pause"/></svg></button>
+      <button class="ibtn red" data-act="quit" aria-label="Keluar"><svg><use href="#i-exit"/></svg></button>
+    </div>
+  </header>
+  <aside class="g-players panel"><h3>Pemain</h3><ul id="playerList"></ul></aside>
+  <div class="g-board" id="boardSlot"><div id="board" class="board"></div></div>
+  <aside class="g-control panel">
+    <div id="turnMsg" class="turn" aria-live="polite">Sekarang giliran Dino Biru!</div>
+    <div class="dice-box">
+      <div id="dice" class="dice" aria-hidden="true"></div>
+      <div class="dice-txt"><span id="diceInfo">Lempar dadunya!</span><span id="posInfo">Posisi: 1</span></div>
+    </div>
+    <button id="rollBtn" class="btn c-orange xl" data-autofocus><img src="assets/images/ikon_dadu_3d.svg" alt="" width="40" height="40">Lempar Dadu</button>
+    <div id="log" class="log" aria-live="polite"></div>
+  </aside>
+</section>
+
+<!-- ============ CARA BERMAIN ============ -->
+<section id="howto" class="screen" data-back="menu">
+  <div class="sheet panel">
+    <h2>Cara Bermain</h2>
+    <ol class="rules">
+      <li>Semua pemain mulai dari kotak <b>1</b>. Pemain bergiliran melempar dadu.</li>
+      <li>Bidak maju sebanyak angka dadu (1–6).</li>
+      <li>Berhenti di dasar <b>tangga</b>? Kamu naik ke atas!</li>
+      <li>Berhenti di kepala <b>ular</b>? Kamu meluncur turun.</li>
+      <li>Untuk menang, harus tiba <b>tepat di kotak 100</b>. Kalau angkanya kelebihan, bidak diam di tempat.</li>
+      <li>Pemain pertama yang sampai kotak 100 jadi juara.</li>
+    </ol>
+    <p class="hint">Dengan remote TV: panah untuk berpindah, OK/Enter untuk memilih, Back/Esc untuk kembali.</p>
+    <div class="row"><button class="btn c-blue" data-act="menu">Kembali</button></div>
+  </div>
+</section>
+
+<!-- ============ SKOR ============ -->
+<section id="scores" class="screen" data-back="menu">
+  <div class="sheet panel">
+    <h2><img src="assets/images/ikon_piala_juara.png" alt="" width="44" height="41"> Riwayat Kemenangan</h2>
+    <ul id="scoreList" class="scorelist"></ul>
+    <div class="row">
+      <button class="btn c-blue" data-act="menu">Kembali</button>
+      <button class="btn c-red" data-act="clearScores">Hapus Riwayat</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TENTANG ============ -->
+<section id="about" class="screen" data-back="menu">
+  <div class="sheet panel">
+    <h2>Tentang</h2>
+    <img class="about-img" src="assets/images/panel_pesan_dan_maskot.webp" alt="" loading="lazy" width="900" height="358">
+    <p>Ular Tangga Dino 2026 adalah game keluarga untuk 1–4 pemain. Tanpa iklan, tanpa akun, dan bisa dimainkan offline setelah dibuka sekali dengan internet.</p>
+    <p class="hint">Data (nama, pengaturan, riwayat) hanya disimpan di perangkat ini.</p>
+    <p>Ular Tangga Dino adalah bagian dari <b>Dino Family Play</b>, portal game keluarga untuk HP, tablet, laptop, dan TV.</p>
+    <p class="credit">Dikembangkan oleh tim <a href="https://benyoriki.com" target="_blank" rel="noopener">benyoriki.com</a></p>
+    <div class="row"><button class="btn c-blue" data-act="menu">Kembali</button><a class="btn c-orange" href="../index.html#game">Semua Game</a></div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ DIALOG ============ -->
+<div class="modal" id="dlg-settings" hidden role="dialog" aria-modal="true" aria-labelledby="t-set">
+  <div class="dlg panel">
+    <h2 id="t-set">Pengaturan</h2>
+    <button class="btn c-green tog" data-act="music" aria-pressed="true">Musik: <span data-v="music">Nyala</span></button>
+    <button class="btn c-green tog" data-act="sfx" aria-pressed="true">Efek suara: <span data-v="sfx">Nyala</span></button>
+    <label class="vol">Volume <input type="range" id="vol" min="0" max="100" step="5" value="70"></label>
+    <button class="btn c-purple tog" data-act="tvmode">Mode layar: <span data-v="tv">Otomatis</span></button>
+    <button class="btn c-blue fs-only" data-act="fullscreen">Layar penuh</button>
+    <button class="btn c-orange" data-act="closeDlg">Selesai</button>
+  </div>
+</div>
+
+<div class="modal" id="dlg-pause" hidden role="dialog" aria-modal="true" aria-labelledby="t-pause">
+  <div class="dlg panel">
+    <h2 id="t-pause">Permainan Dijeda</h2>
+    <button class="btn c-orange xl" data-act="resume"><svg class="ic"><use href="#i-play"/></svg>Lanjutkan</button>
+    <button class="btn c-blue" data-act="settings"><svg class="ic"><use href="#i-gear"/></svg>Pengaturan</button>
+    <button class="btn c-red" data-act="quit">Keluar ke Menu</button>
+    <a class="btn c-cyan to-portal" href="../index.html#game"><svg class="ic"><use href="#i-home"/></svg>Layar Utama</a>
+  </div>
+</div>
+
+<div class="modal" id="dlg-confirm" hidden role="alertdialog" aria-modal="true" aria-labelledby="t-conf">
+  <div class="dlg panel">
+    <h2 id="t-conf">Yakin?</h2>
+    <p id="confMsg"></p>
+    <div class="row">
+      <button class="btn c-blue" data-act="confNo">Batal</button>
+      <button class="btn c-red" data-act="confYes">Ya</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="dlg-win" hidden role="dialog" aria-modal="true" aria-labelledby="winTitle">
+  <div class="dlg win panel">
+    <img class="badge" src="assets/images/badge_selamat_menang.webp" alt="Selamat! Kamu menang!" width="750" height="477">
+    <h2 id="winTitle">Dino Biru menang!</h2>
+    <img id="winPawn" class="winpawn" alt="" width="120" height="150">
+    <div class="row">
+      <button class="btn c-orange lg" data-act="again">Main Lagi</button>
+      <button class="btn c-blue" data-act="toMenu"><svg class="ic"><use href="#i-home"/></svg>Menu</button>
+    </div>
+  </div>
+</div>
+<div id="confetti" aria-hidden="true"></div>
+
+<script src="storage.js"></script>
+<script src="audio.js"></script>
+<script src="animation.js"></script>
+<script src="player.js"></script>
+<script src="board.js"></script>
+<script src="dice.js"></script>
+<script src="game-engine.js"></script>
+<script src="settings.js"></script>
+<script src="tv-navigation.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
