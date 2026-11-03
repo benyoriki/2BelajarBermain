@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#08162e">
+  <meta property="og:title" content="Monopoli Dino - Bermain, Belajar, Bersama Keluarga">
+  <meta property="og:description" content="Beli properti dino, bangun hotel, dan jadi juragan terakhir yang bertahan.">
+  <meta property="og:image" content="assets/logo-monopoli-dino.webp">
+  <link rel="preload" href="assets/fredoka-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <title>Monopoli Dino - Bermain, Belajar, Bersama Keluarga</title>
+  <meta name="description" content="Game papan Monopoli bertema dinosaurus untuk keluarga. Main solo melawan CPU atau bergantian bersama keluarga.">
+  <link rel="icon" type="image/png" href="assets/dino-hijau.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="game.css">
+  <link rel="stylesheet" href="responsive.css">
+</head>
+<body data-screen="landing">
+<div id="app">
+
+  <!-- ============ LANDING ============ -->
+  <section id="screen-landing" class="screen" aria-label="Beranda">
+    <div class="bg" aria-hidden="true">
+      <i class="aurora a1"></i><i class="aurora a2"></i>
+      <i class="stars"></i><i class="stars b"></i>
+      <i class="moon"></i>
+      <div class="sun"></div>
+      <i class="ptero p1"></i><i class="ptero p2"></i><i class="ptero p3"></i>
+      <div class="volcano"></div>
+      <div class="ridge far"></div><div class="ridge mid"></div><div class="ridge near"></div>
+      <i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i><i class="spark s4"></i><i class="spark s5"></i><i class="spark s6"></i>
+    </div>
+    <div class="dinos" aria-hidden="true">
+      <img class="d d-biru" src="assets/dino-biru.png" alt="">
+      <img class="d d-merah" src="assets/dino-merah.png" alt="">
+      <img class="d d-kuning" src="assets/dino-kuning.png" alt="">
+      <img class="d d-hijau" src="assets/dino-hijau.png" alt="">
+      <img class="d d-ptero" src="assets/dino-ptero.png" alt="">
+      <img class="dice dice-a" src="assets/dadu-putih.png" alt="">
+      <img class="dice dice-b" src="assets/dadu-merah.png" alt="">
+    </div>
+    <a class="portal-link" href="../index.html#game" aria-label="Kembali ke Dino Family Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7 1.600-1.600L11.200 12l5.400-5.400z"/></svg><span>Dino Family Play</span></a>
+    <main class="hero">
+      <h1 class="sr">Monopoli Dino</h1>
+      <div class="logo-wrap"><i class="rays" aria-hidden="true"></i><img class="logo" src="assets/logo-monopoli-dino.webp" alt="Monopoli Dino - Bermain, Belajar, Bersama Keluarga" width="860" height="583"></div>
+      <p class="pitch">Beli properti, bangun hotel, dan jadi juragan terakhir yang bertahan. Seru untuk seluruh keluarga!</p>
+      <div class="menu">
+        <div id="resumeRow" class="resume" hidden>
+          <button type="button" class="btn resume-card" data-go="resume">
+            <img id="resumeImg" alt="" src="assets/dino-biru.png">
+            <span><b>Lanjutkan permainan</b><small id="resumeInfo">Simpanan otomatis</small></span>
+            <i class="chev" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="btn gray icon-btn" data-go="delete" aria-label="Hapus simpanan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6l1 2h4v2H4V5h4zM6 9h12l-1 11a2 2 0 01-2 2H9a2 2 0 01-2-2z"/></svg></button>
+        </div>
+        <button type="button" id="startBtn" class="btn green xl cta" data-go="start" data-primary><span class="play" aria-hidden="true"></span>Mulai Bermain</button>
+        <div class="menu-row">
+          <button type="button" class="btn gray tile-btn" data-go="multi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11a3.5 3.5 0 100-7 3.5 3.5 0 000 7zm7 0a3 3 0 100-6 3 3 0 000 6zM9 13c-3 0-6 1.5-6 4v2h12v-2c0-2.5-3-4-6-4zm7 0c-.5 0-1 0-1.500.1 1.100.9 1.800 2 1.800 3.400V19H21v-2c0-2-2.500-4-5-4z"/></svg><span>Multiplayer</span></button>
+          <button type="button" class="btn gray tile-btn" data-go="guide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4.500h7a3 3 0 013 3V21a2 2 0 00-2-2H3zM21 4.500h-6.200A3 3 0 0013 5v16a2 2 0 012-2h6z"/></svg><span>Panduan</span></button>
+          <button type="button" class="btn gray tile-btn" data-go="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.500a3.500 3.500 0 100 7 3.500 3.500 0 000-7zm8.500 5.200l-1.700-.3a7 7 0 000-2.800l1.700-.3-1.500-2.600-1.600.6a7 7 0 00-2.400-1.400L14.700 4.500h-3l-.3 1.700a7 7 0 00-2.400 1.400l-1.600-.6-1.500 2.600 1.700.3a7 7 0 000 2.800l-1.700.3 1.500 2.600 1.600-.6a7 7 0 002.400 1.400l.3 1.700h3l.3-1.700a7 7 0 002.400-1.400l1.600.6z"/></svg><span>Pengaturan</span></button>
+        </div>
+      </div>
+      <ul class="chips" aria-label="Fitur">
+        <li><img alt="" src="assets/koin.png">Auto Save</li>
+        <li><img alt="" src="assets/mahkota.png">1-4 Pemain</li>
+        <li><img alt="" src="assets/kristal.png">Lawan CPU</li>
+        <li><img alt="" src="assets/trofi.png">Siap Smart TV</li>
+      </ul>
+      <ul class="how" aria-label="Cara bermain">
+        <li><img alt="" src="assets/taman-fosil.png"><span><b>Beli properti</b>Kuasai petak dino</span></li>
+        <li><img alt="" src="assets/hotel.png"><span><b>Bangun hotel</b>Sewa makin mahal</span></li>
+        <li><img alt="" src="assets/trofi.png"><span><b>Jadi juragan</b>Bertahan sampai akhir</span></li>
+      </ul>
+    </main>
+  </section>
+
+  <!-- ============ SETUP ============ -->
+  <section id="screen-setup" class="screen" aria-label="Siapkan permainan">
+    <div class="bg" aria-hidden="true">
+      <i class="aurora a1"></i><i class="aurora a2"></i>
+      <i class="stars"></i><i class="stars b"></i>
+      <i class="moon"></i>
+      <div class="sun"></div>
+      <i class="ptero p1"></i><i class="ptero p2"></i><i class="ptero p3"></i>
+      <div class="volcano"></div>
+      <div class="ridge far"></div><div class="ridge mid"></div><div class="ridge near"></div>
+      <i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i><i class="spark s4"></i><i class="spark s5"></i><i class="spark s6"></i>
+    </div>
+    <main class="setup">
+      <h1>Siapkan Permainan</h1>
+      <div id="setupMode" class="segrow"></div>
+      <div class="segrow"><span class="lbl">Jumlah pemain</span><span id="setupCount" class="seg"></span></div>
+      <div id="setupSlots" class="slots"></div>
+      <div id="setupDiffRow" class="segrow"><span class="lbl">Kesulitan CPU</span><span id="setupDiff" class="seg"></span></div>
+      <div class="setup-actions">
+        <button type="button" class="btn gray" data-go="home">Kembali</button>
+        <button type="button" class="btn green xl cta" data-go="startgame" data-primary><span class="play" aria-hidden="true"></span>Mulai!</button>
+      </div>
+    </main>
+  </section>
+
+  <!-- ============ GAME ============ -->
+  <section id="screen-game" class="screen" aria-label="Permainan">
+    <header class="g-top">
+      <button type="button" class="btn mini gray" data-go="menu">Menu</button>
+      <div id="turnLabel" class="turnlabel"></div>
+      <button type="button" id="soundBtn" class="btn mini gray" data-go="sound" aria-label="Suara"><span class="spk" aria-hidden="true"></span></button>
+    </header>
+    <div class="g-main">
+      <aside id="players" class="g-players" aria-label="Pemain"></aside>
+      <div class="g-boardwrap"><div id="board" class="board" aria-label="Papan permainan"></div></div>
+      <aside class="g-side">
+        <div id="actions" class="actions" aria-live="polite"></div>
+        <p id="ticker" class="ticker"></p>
+        <ul id="log" class="log" aria-label="Riwayat"></ul>
+      </aside>
+    </div>
+  </section>
+
+</div>
+<div id="modal-root"></div>
+<div id="toast-root" aria-live="polite"></div>
+<noscript><p style="padding:2rem;font:1.2rem sans-serif">Monopoli Dino membutuhkan JavaScript agar bisa dimainkan.</p></noscript>
+
+<script src="sound.js"></script>
+<script src="storage.js"></script>
+<script src="board.js"></script>
+<script src="cards.js"></script>
+<script src="player.js"></script>
+<script src="economy.js"></script>
+<script src="ai.js"></script>
+<script src="game.js"></script>
+<script src="tv-navigation.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
