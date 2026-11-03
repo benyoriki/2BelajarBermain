@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 420" preserveAspectRatio="xMidYMax slice">
+<defs><linearGradient id="a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a8a9a"/><stop offset="1" stop-color="#0f4057"/></linearGradient></defs>
+<path d="M0 420V260Q150 190 300 250T600 235T900 255T1200 220T1600 250V420Z" fill="url(#a)"/>
+<path d="M0 260Q150 190 300 250T600 235T900 255T1200 220T1600 250" fill="none" stroke="#7fe3d0" stroke-opacity=".35" stroke-width="3"/>
+</svg>
